@@ -6,6 +6,7 @@ Contain feature classes that are proper to the PE format
 from base import BaseFeature
 import lief
 
+
 class GeneralFileInfo(BaseFeature):
     """
     this class is used to extract the General information from the PE file,
@@ -13,6 +14,7 @@ class GeneralFileInfo(BaseFeature):
     """
     name = "General information"
     dim = 11
+
     def __init__(self):
         super(BaseFeature, self).__init__()
 
@@ -21,7 +23,7 @@ class GeneralFileInfo(BaseFeature):
         we return True if the lief_file is not None, but we can go farther,
         and return true/false for every feature in this section, like a dict {'size':true,'imports':False .... etc}
         """
-        if lief_file is None :
+        if lief_file is None:
             return False
         return True
 
@@ -31,9 +33,9 @@ class GeneralFileInfo(BaseFeature):
         """
         if lief_file is None:
             return {
-                'virtual_size':0,
-                'name':'',
-                'sizeof_PFheader':0,
+                'virtual_size': 0,
+                'name': '',
+                'sizeof_PFheader': 0,
                 'has_signature': None,
                 'has_debug': 0,
                 'exports': 0,
@@ -44,11 +46,11 @@ class GeneralFileInfo(BaseFeature):
                 'symbols': 0
             }
 
-        else :
+        else:
             return{
-                'virtual_size':lief_file.virtual_size,
-                'name':lief_file.name,
-                'sizeof_PFheader':lief_file.sizeof_headers,
+                'virtual_size': lief_file.virtual_size,
+                'name': lief_file.name,
+                'sizeof_PFheader': lief_file.sizeof_headers,
                 'signature': int(lief_file.has_signature),
                 'has_debug': int(lief_file.has_debug),
                 'exports': len(lief_file.exported_functions),
@@ -58,19 +60,21 @@ class GeneralFileInfo(BaseFeature):
                 'has_tls': int(lief_file.has_tls),
                 'symbols': len(lief_file.symbols)
             }
+
+
 class MSDOS_Header(BaseFeature):
     name = "MS-DOS Header"
     dim = 5
 
     def __init__(self):
         super(BaseFeature, self).__init__()
-    
+
     def can_extract(self, lief_file):
         """
         we return True if the lief_file is not None, but we can go farther,
         and return true/false for every feature in this section.
         """
-        if lief_file is None :
+        if lief_file is None:
             return False
         return True
 
@@ -82,48 +86,54 @@ class MSDOS_Header(BaseFeature):
             return{
                 'magic': None,
                 'pages_file': 0,
-                'checksum' : 0,
+                'checksum': 0,
                 'oem_id': 0,
-                'oem_info':0
+                'oem_info': 0
             }
-        else :
+        else:
             return{
                 'magic': lief_file.dos_header.magic,
                 'pages_file': lief_file.dos_header.file_size_in_pages,
-                'checksum' : lief_file.dos_header.checksum,
+                'checksum': lief_file.dos_header.checksum,
                 'oem_id': lief_file.dos_header.oem_id,
-                'oem_info':lief_file.dos_header.oem_info
+                'oem_info': lief_file.dos_header.oem_info
             }
+
 
 class PE_Header(BaseFeature):
     name = "PE Header"
-    dim = 3
+    dim = 6
+
     def __init__(self):
         super(BaseFeature, self).__init__()
 
-    
     def can_extract(self, lief_file):
         """
         we return True if the lief_file is not None, but we can go farther,
         and return true/false for every feature in this section.
         """
-        if lief_file is None :
+        if lief_file is None:
             return False
         return True
 
-    def extracted_features(self,lief_file):
+    def extracted_features(self, lief_file):
         if lief_file is None:
             return {
                 'timestamp': 0,
                 'machine': "",
-                'characteristics': []
+                'characteristics': [],
+                'numberof_sections': 0,
+                'numberof_symbols': 0,
+                'PE_signature': None
             }
-        else :
+        else:
             return {
                 'timestamp': lief_file.header.time_date_stamps,
-                ## the lief machine type is not a string it gives something like this MACHINE_TYPES.AMD64
+                # the lief machine type is not a string it gives something like this MACHINE_TYPES.AMD64
                 'machine':  str(lief_file.header.machine).split('.')[-1],
-                'characteristics': [str(c).split('.')[-1] for c in lief_file.header.characteristics_list]
+                'characteristics': [str(c).split('.')[-1] for c in lief_file.header.characteristics_list],
+                'numberof_sections': lief_file.header.numberof_sections,
+                'numberof_symbols': lief_file.header.numberof_symbols,
+                # the PE signature should be [80,69,0,0] it means PE\0\0
+                'PE_signature': lief_file.header.signature
             }
-
-
