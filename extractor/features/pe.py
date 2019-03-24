@@ -137,3 +137,63 @@ class PE_Header(BaseFeature):
                 # the PE signature should be [80,69,0,0] it means PE\0\0
                 'PE_signature': lief_file.header.signature
             }
+
+
+class Optional_Header(BaseFeature):
+    name = "Optional_Header"
+    dim = 14
+
+    def __init__(self):
+        super(BaseFeature, self).__init__()
+
+    def can_extract(self, lief_file):
+        """
+        we return True if the lief_file is not None, but we can go farther,
+        and return true/false for every feature in this section.
+        """
+        if lief_file is None:
+            return False
+        return True
+
+    def extracted_features(self, lief_file):
+        if lief_file is None:
+            return {
+                'subsystem': "",
+                'dll_characteristics': [],
+                'magic': "",
+                'major_image_version': 0,
+                'minor_image_version': 0,
+                'major_linker_version': 0,
+                'minor_linker_version': 0,
+                'major_operating_system_version': 0,
+                'minor_operating_system_version': 0,
+                'major_subsystem_version': 0,
+                'minor_subsystem_version': 0,
+                'sizeof_code': 0,
+                'sizeof_headers': 0,
+                'sizeof_heap_commit': 0
+            }
+        else:
+            return {
+                'subsystem': lief_file.optional_header.subsystem,
+                'dll_characteristics': [str(dll_c).split('.')[-1] for dll_c in lief_file.optional_header.dll_characteristics_lists],
+                'magic': str(lief_file.optional_header.magic).split('.')[-1],
+                'major_image_version': lief_file.optional_header.major_image_version,
+                'minor_image_version': lief_file.optional_header.minor_image_version,
+                'major_linker_version': lief_file.optional_header.major_linker_version,
+                'minor_linker_version': lief_file.optional_header.minor_linker_version,
+                'major_operating_system_version': lief_file.optional_header.major_operating_system_version,
+                'minor_operating_system_version': lief_file.optional_header.minor_operating_system_version,
+                'major_subsystem_version': lief_file.optional_header.major_subsystem_version,
+                'minor_subsystem_version': lief_file.optional_header.minor_subsystem_version,
+                'sizeof_code': lief_file.optional_header.sizeof_code,
+                'sizeof_headers': lief_file.optional_header.sizeof_headers,
+                'sizeof_heap_commit': lief_file.optional_header.sizeof_heap_commit
+            }
+
+
+if __name__ == "__main__":
+    lief_file = lief.PE.parse("/home/yasser/explorer.exe")
+    PE_header = Optional_Header()
+    print(PE_header.extracted_features(None))
+    print(PE_header.extracted_features(lief_file))
