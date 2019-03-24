@@ -19,6 +19,11 @@ class BaseFeature(object):
         """
         return True
 
+    def extracted_features(self, raw_exe):
+        """
+        To extracted the  wanted features, the output of this fuction depends on the feature
+        """
+        raise (NotImplemented)
 
 class SomeBaseFeature(BaseFeature):
     pass
