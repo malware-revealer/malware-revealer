@@ -3,7 +3,7 @@ ELF Feature Classes.
 Contain feature classes that are proper to the PE format
 """
 
-from base import BaseFeature
+from .base import BaseFeature
 import lief
 
 
@@ -190,6 +190,4 @@ class Optional_Header(BaseFeature):
                 'sizeof_headers': lief_file.optional_header.sizeof_headers,
                 'sizeof_heap_commit': lief_file.optional_header.sizeof_heap_commit
             }
-
-
 
