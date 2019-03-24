@@ -192,8 +192,4 @@ class Optional_Header(BaseFeature):
             }
 
 
-if __name__ == "__main__":
-    lief_file = lief.PE.parse("/home/yasser/explorer.exe")
-    PE_header = Optional_Header()
-    print(PE_header.extracted_features(None))
-    print(PE_header.extracted_features(lief_file))
+
