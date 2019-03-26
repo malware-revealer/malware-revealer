@@ -1,0 +1,7 @@
+features:
+  base:
+    - BaseFeature
+  pe:
+    - GeneralFileInfo
+  elf:
+    - SomeELFFeature
