@@ -22,6 +22,7 @@ def new(conf_file):
 
     stream = open(conf_file)
     conf = yaml.load(stream)
+    stream.close()
 
     features = {}
     for feature_module in conf["features"]:
