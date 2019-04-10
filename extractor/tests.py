@@ -9,9 +9,14 @@ class TestExtractor(unittest.TestCase):
         import Extractor
         extractor = Extractor.new("test_assets/extractor_conf.yaml")
         feature_list = list(extractor.features.keys())
+        expected_feature_list = sorted([
+                                    'base.BaseFeature',
+                                    'elf.SomeELFFeature',
+                                    'pe.GeneralFileInfo',
+                                    ])
         self.assertEqual(
-            feature_list,
-            ['base.BaseFeature', 'elf.SomeELFFeature', 'pe.GeneralFileInfo'],
+            sorted(feature_list),
+            expected_feature_list,
             "Imported features don't match"
             )
 
