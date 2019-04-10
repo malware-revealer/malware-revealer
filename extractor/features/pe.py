@@ -4,13 +4,14 @@ Contain feature classes that are proper to the PE format
 """
 
 from .base import BaseFeature
+from .utils import *
 import lief
 
 
 class GeneralFileInfo(BaseFeature):
     """
     this class is used to extract the General information from the PE file,
-    such as the file size, number of export,import functions ...etc 
+    such as the file size, number of export,import functions ...etc
     """
     name = "General information"
     dim = 11
@@ -18,19 +19,21 @@ class GeneralFileInfo(BaseFeature):
     def __init__(self):
         super(BaseFeature, self).__init__()
 
-    def can_extract(self, lief_file):
+    def can_extract(self, raw_exe):
         """
         we return True if the lief_file is not None, but we can go farther,
         and return true/false for every feature in this section, like a dict {'size':true,'imports':False .... etc}
         """
+        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return False
         return True
 
-    def extracted_features(self, lief_file):
+    def extracted_features(self, raw_exe):
         """
-        we extract the the general informations here 
+        we extract the the general informations here
         """
+        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return {
                 'virtual_size': 0,
@@ -69,19 +72,21 @@ class MSDOS_Header(BaseFeature):
     def __init__(self):
         super(BaseFeature, self).__init__()
 
-    def can_extract(self, lief_file):
+    def can_extract(self, raw_exe):
         """
         we return True if the lief_file is not None, but we can go farther,
         and return true/false for every feature in this section.
         """
+        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return False
         return True
 
-    def extracted_features(self, lief_file):
+    def extracted_features(self, raw_exe):
         """
-        we extract all the needed header informations here 
+        we extract all the needed header informations here
         """
+        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return{
                 'magic': None,
@@ -107,16 +112,18 @@ class PE_Header(BaseFeature):
     def __init__(self):
         super(BaseFeature, self).__init__()
 
-    def can_extract(self, lief_file):
+    def can_extract(self, raw_exe):
         """
         we return True if the lief_file is not None, but we can go farther,
         and return true/false for every feature in this section.
         """
+        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return False
         return True
 
-    def extracted_features(self, lief_file):
+    def extracted_features(self, raw_exe):
+        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return {
                 'timestamp': 0,
@@ -146,16 +153,18 @@ class Optional_Header(BaseFeature):
     def __init__(self):
         super(BaseFeature, self).__init__()
 
-    def can_extract(self, lief_file):
+    def can_extract(self, raw_exe):
         """
         we return True if the lief_file is not None, but we can go farther,
         and return true/false for every feature in this section.
         """
+        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return False
         return True
 
-    def extracted_features(self, lief_file):
+    def extracted_features(self, raw_exe):
+        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return {
                 'subsystem': "",
@@ -190,4 +199,3 @@ class Optional_Header(BaseFeature):
                 'sizeof_headers': lief_file.optional_header.sizeof_headers,
                 'sizeof_heap_commit': lief_file.optional_header.sizeof_heap_commit
             }
-
