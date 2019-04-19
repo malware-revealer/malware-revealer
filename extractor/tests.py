@@ -7,7 +7,10 @@ class TestExtractor(unittest.TestCase):
         Test the extractor creation using a test conf file.
         """
         import Extractor
-        extractor = Extractor.new("test_assets/extractor_conf.yaml")
+        conf_file = "test_assets/extractor_conf.yaml"
+        in_folder = "test_assets/executables"
+        out_folder = "test_assets/extracted_features"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
         feature_list = list(extractor.features.keys())
         expected_feature_list = sorted([
                                     'base.BaseFeature',

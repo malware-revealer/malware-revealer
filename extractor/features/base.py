@@ -11,6 +11,7 @@ class BaseFeature(object):
 
     name = ''
     dim = 0
+    is_image = False
 
     def can_extract(self, raw_exe):
         """
@@ -23,7 +24,7 @@ class BaseFeature(object):
         """
         To extracted the  wanted features, the output of this fuction depends on the feature
         """
-        raise (NotImplemented)
+        raise NotImplementedError
 
 class SomeBaseFeature(BaseFeature):
     pass
