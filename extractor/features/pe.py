@@ -29,7 +29,7 @@ class GeneralFileInfo(BaseFeature):
             return False
         return True
 
-    def extracted_features(self, raw_exe):
+    def extract_features(self, raw_exe):
         """
         we extract the the general informations here
         """
@@ -82,7 +82,7 @@ class MSDOS_Header(BaseFeature):
             return False
         return True
 
-    def extracted_features(self, raw_exe):
+    def extract_features(self, raw_exe):
         """
         we extract all the needed header informations here
         """
@@ -122,7 +122,7 @@ class PE_Header(BaseFeature):
             return False
         return True
 
-    def extracted_features(self, raw_exe):
+    def extract_features(self, raw_exe):
         lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return {
@@ -163,7 +163,7 @@ class Optional_Header(BaseFeature):
             return False
         return True
 
-    def extracted_features(self, raw_exe):
+    def extract_features(self, raw_exe):
         lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return {

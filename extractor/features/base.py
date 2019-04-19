@@ -19,7 +19,7 @@ class BaseFeature(object):
         """
         return True
 
-    def extracted_features(self, raw_exe):
+    def extract_features(self, raw_exe):
         """
         To extracted the  wanted features, the output of this fuction depends on the feature
         """
