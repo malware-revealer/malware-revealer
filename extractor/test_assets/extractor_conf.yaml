@@ -1,6 +1,6 @@
 features:
   base:
-    - BaseFeature
+    - ByteCounts
   pe:
     - GeneralFileInfo
   elf:

@@ -2,6 +2,7 @@
 Base Feature Classes.
 Contain feature classes that are common to all executables
 """
+import numpy as np
 
 class BaseFeature(object):
     """
@@ -26,5 +27,17 @@ class BaseFeature(object):
         """
         raise NotImplementedError
 
-class SomeBaseFeature(BaseFeature):
-    pass
+class ByteCounts(BaseFeature):
+    """
+    Count the number of occurence of each byte.
+    The index is the byte itself, so the number of occurences of byte 0 should
+    be the first element in the list.
+    """
+
+    name = 'byte_count'
+
+    def extract_features(self, raw_exe):
+        array_exe = np.frombuffer(raw_exe, dtype=np.uint8)
+        counts = np.bincount(array_exe, minlength=256)
+        feature = {'byte_count': counts.tolist()}
+        return feature

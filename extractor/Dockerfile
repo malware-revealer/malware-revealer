@@ -8,6 +8,7 @@ RUN apt-get install -y python3 python3-pip
 # Install python modules
 RUN pip3 install lief
 RUN apt-get install -y python3-yaml
+RUN pip3 install numpy
 
 # Copy source files
 RUN mkdir $APP_PATH
