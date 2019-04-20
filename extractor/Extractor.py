@@ -50,22 +50,22 @@ def prepare_extraction(features, in_folder, out_folder):
 def prepare_extraction_(out_folder, labels, image_extractors):
     json_out = os.path.join(out_folder, JSON_FOLDER)
     image_out = os.path.join(out_folder, IMAGE_FOLDER)
-    os.mkdir(json_out)
-    os.mkdir(image_out)
+    create_dir_if_does_not_exist(json_out)
+    create_dir_if_does_not_exist(image_out)
 
     ## JSON
     # Create subfolder for each label
     for label in labels:
-        os.mkdir(os.path.join(json_out, label))
+        create_dir_if_does_not_exist(os.path.join(json_out, label))
 
     ## IMAGE
     # Create image subfolder for each image extractor
     for image_extractor in image_extractors:
         image_extractor_out = os.path.join(image_out, image_extractor)
-        os.mkdir(image_extractor_out)
+        create_dir_if_does_not_exist(image_extractor_out)
         # Create subfolder for each label in each image subfolder
         for label in labels:
-            os.mkdir(os.path.join(image_extractor_out, label))
+            create_dir_if_does_not_exist(os.path.join(image_extractor_out, label))
 
 
 def iter_executables(in_folder):
@@ -102,6 +102,11 @@ def get_labels_from_folder(folder):
         if os.path.isdir(os.path.join(folder, file)):
             labels.append(file)
     return labels
+
+
+def create_dir_if_does_not_exist(folder):
+    if not os.path.exists(folder):
+        os.mkdir(folder)
 
 
 def new(conf_file, in_folder, out_folder):
