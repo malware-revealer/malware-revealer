@@ -28,7 +28,8 @@ class Extractor(object):
                 extracted_features = feature().extract_features(exe)
                 if feature.is_image:
                     image = extracted_features['image']
-                    save_features_image(name, image, label, feature.name, self.out_folder)
+                    image_format = extracted_features['image_format']
+                    save_features_image(name, image, image_format, label, feature.name, self.out_folder)
                 else:
                     features_dict.update(extracted_features)
             save_features_json(name, features_dict, label, self.out_folder)
@@ -83,8 +84,9 @@ def iter_executables(in_folder):
             yield name, exe, label
 
 
-def save_features_image(name, image, label, feature_name, out_folder):
-    pass
+def save_features_image(name, image, image_format, label, feature_name, out_folder):
+    image_path = os.path.join(out_folder, IMAGE_FOLDER, feature_name, label, name + '.' + image_format)
+    image.save(image_path)
 
 
 def save_features_json(name, features_dict, label, out_folder):

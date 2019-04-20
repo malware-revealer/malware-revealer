@@ -13,6 +13,7 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         feature_list = list(extractor.features.keys())
         expected_feature_list = sorted([
+                                    'base.BinaryImage',
                                     'base.ByteCounts',
                                     'elf.SomeELFFeature',
                                     'pe.GeneralFileInfo',
