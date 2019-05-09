@@ -74,3 +74,11 @@ class BinaryImage(BaseFeature):
 
         feature = {'image': img, 'image_format': self.image_format}
         return feature
+
+
+class FileSize(BaseFeature):
+    """Simply get the executable size in bytes."""
+
+    def extract_features(self, raw_exe):
+        file_size = len(raw_exe)
+        return {'file_size': file_size}
