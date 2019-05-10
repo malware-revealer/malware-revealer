@@ -92,12 +92,12 @@ class URLs(BaseFeature):
 
     name = 'urls'
 
-    RE_URL = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+    RE_URL = b'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*(),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
 
     def extract_features(self, raw_exe):
-        urls = re.findall(URL.RE_URL, raw_exe.decode())
+        urls = re.findall(URLs.RE_URL, raw_exe)
         features = {
             'url_counts': len(urls),
-            'urls': ', '.join(urls),
+            'urls': b', '.join(urls).decode(),
         }
         return features
