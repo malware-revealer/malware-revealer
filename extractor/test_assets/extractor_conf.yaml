@@ -2,7 +2,10 @@ features:
   base:
     - ByteCounts
     - BinaryImage
+    - FileSize
+    - URLs
   pe:
     - GeneralFileInfo
+    - Libraries
   elf:
     - SomeELFFeature

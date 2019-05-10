@@ -17,6 +17,9 @@ class TestExtractor(unittest.TestCase):
                                     'base.ByteCounts',
                                     'elf.SomeELFFeature',
                                     'pe.GeneralFileInfo',
+                                    'pe.Libraries',
+                                    'base.FileSize',
+                                    'base.URLs',
                                     ])
         self.assertEqual(
             sorted(feature_list),
