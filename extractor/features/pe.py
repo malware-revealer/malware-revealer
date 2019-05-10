@@ -199,3 +199,21 @@ class Optional_Header(BaseFeature):
                 'sizeof_headers': lief_file.optional_header.sizeof_headers,
                 'sizeof_heap_commit': lief_file.optional_header.sizeof_heap_commit
             }
+
+
+class Libraries(BaseFeature):
+    """
+    Get the number of imported libraries and a comma separated list
+    of all the imported libraries.
+    """
+
+    name = 'libraries'
+
+    def extract_features(self, raw_exe):
+        lief_file = lief_from_raw(raw_exe)
+        libraries = [lib.name for lib in lief_file.imports]
+        features = {
+            'lib_counts': len(libraries),
+            'libs': ', '.join(libraries),
+        }
+        return features
