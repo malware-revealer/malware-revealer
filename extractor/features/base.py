@@ -3,6 +3,7 @@ Base Feature Classes.
 Contain feature classes that are common to all executables
 """
 import numpy as np
+import re
 from PIL import Image
 from math import sqrt
 
@@ -79,6 +80,24 @@ class BinaryImage(BaseFeature):
 class FileSize(BaseFeature):
     """Simply get the executable size in bytes."""
 
+    name = 'file_size'
+
     def extract_features(self, raw_exe):
         file_size = len(raw_exe)
         return {'file_size': file_size}
+
+
+class URLs(BaseFeature):
+    """Get the number of urls and a comma separated list of all urls."""
+
+    name = 'urls'
+
+    RE_URL = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+
+    def extract_features(self, raw_exe):
+        urls = re.findall(URL.RE_URL, raw_exe.decode())
+        features = {
+            'url_counts': len(urls),
+            'urls': ', '.join(urls),
+        }
+        return features
