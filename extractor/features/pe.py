@@ -6,6 +6,7 @@ Contain feature classes that are proper to the PE format
 from .base import BaseFeature
 from .utils import *
 import lief
+from lief.PE import SECTION_CHARACTERISTICS as SC
 
 
 class GeneralFileInfo(BaseFeature):
@@ -216,4 +217,39 @@ class Libraries(BaseFeature):
             'lib_counts': len(libraries),
             'libs': ', '.join(libraries),
         }
+        return features
+
+
+class Sections(BaseFeature):
+    """
+    Get the number of sections and informations about each individual section
+    in the PE file.
+    """
+
+    name = 'sections'
+
+    def extract_features(self, raw_exe):
+        lief_file = lief_from_raw(raw_exe)
+        sections = lief_file.sections
+
+        features = {
+            'sections':{},
+            'section_counts': len(sections),
+        }
+        for section in sections:
+            is_readable = section.has_characteristic(SC.MEM_READ)
+            is_writable = section.has_characteristic(SC.MEM_WRITE)
+            is_executable = section.has_characteristic(SC.MEM_EXECUTE)
+
+            section_info = {
+                'virtual_size': section.virtual_size,
+                'virtual_address': section.virtual_address,
+                'size': section.size,
+                'entropy': section.entropy,
+                'is_readable': is_readable,
+                'is_writable': is_writable,
+                'is_executable': is_executable,
+            }
+            features['sections'][section.name] = section_info
+
         return features
