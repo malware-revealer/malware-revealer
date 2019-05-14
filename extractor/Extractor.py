@@ -106,7 +106,7 @@ def get_labels_from_folder(folder):
 
 def create_dir_if_does_not_exist(folder):
     if not os.path.exists(folder):
-        os.mkdir(folder)
+        os.makedirs(folder)
 
 
 def new(conf_file, in_folder, out_folder):
