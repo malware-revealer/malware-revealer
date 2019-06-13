@@ -7,6 +7,8 @@ import re
 from PIL import Image
 from math import sqrt
 
+from .utils import lief_from_raw
+
 
 class BaseFeature(object):
     """
@@ -99,5 +101,22 @@ class URLs(BaseFeature):
         features = {
             'url_counts': len(urls),
             'urls': b', '.join(urls).decode(),
+        }
+        return features
+
+
+class ImportedFunctions(BaseFeature):
+    """
+    Get the number and a comma separated list of imported funcitons.
+    """
+
+    name = 'imported_functions'
+
+    def extract_features(self, raw_exe):
+        lief_file = lief_from_raw(raw_exe)
+        imported_functions = [func.name for func in lief_file.imported_functions]
+        features = {
+            'imported_functions_counts': len(imported_functions),
+            'imported_functions': imported_functions,
         }
         return features
