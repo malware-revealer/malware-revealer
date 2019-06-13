@@ -21,6 +21,7 @@ class TestExtractor(unittest.TestCase):
                                     'base.FileSize',
                                     'base.URLs',
                                     'base.ImportedFunctions',
+                                    'base.ExportedFunctions',
                                     ])
         self.assertEqual(
             sorted(feature_list),

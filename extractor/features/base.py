@@ -120,3 +120,20 @@ class ImportedFunctions(BaseFeature):
             'imported_functions': imported_functions,
         }
         return features
+
+
+class ExportedFunctions(BaseFeature):
+    """
+    Get the number and a comma separated list of exported funcitons.
+    """
+
+    name = 'exported_functions'
+
+    def extract_features(self, raw_exe):
+        lief_file = lief_from_raw(raw_exe)
+        exported_functions = [func.name for func in lief_file.exported_functions]
+        features = {
+            'exported_functions_counts': len(exported_functions),
+            'exported_functions': exported_functions,
+        }
+        return features

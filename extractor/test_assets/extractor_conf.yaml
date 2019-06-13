@@ -5,6 +5,7 @@ features:
     - FileSize
     - URLs
     - ImportedFunctions
+    - ExportedFunctions
   pe:
     - GeneralFileInfo
     - Libraries
