@@ -137,3 +137,31 @@ class ExportedFunctions(BaseFeature):
             'exported_functions': exported_functions,
         }
         return features
+
+
+class Strings(BaseFeature):
+    """Get the number of strings(+5 char), strings set, avrege length, paths set,
+    paths number ,registry and MZ headers number."""
+
+    name = 'Strings'
+
+    RE_STRING = br'[\w$-@.&+!*()]{5,}'
+    RE_PATH = br'[A-Z]:\\[\w\\\. ]*'
+    RE_REGISTRY = b'^HKEY_'
+    RE_MZ = b'^MZ'
+
+    def extract_features(self, raw_exe):
+        strings = re.findall(Strings.RE_STRING, raw_exe)
+        paths = re.findall(Strings.RE_PATH, raw_exe)
+        registry_names = re.findall(Strings.RE_REGISTRY, raw_exe)
+        MZ = re.findall(Strings.RE_MZ, raw_exe)
+        features = {
+            'strings_count': len(strings),
+            'printabales': set(b', '.join(strings).decode().split(",")),
+            'avg_length':sum([len(str) for str in strings])/len(strings),
+            'paths_count': len(paths),
+            'paths': set(b', '.join(paths).decode().split(",")),
+            'registry_count': len(registry_names),
+            'MZ': len(MZ),
+        }
+        return features
