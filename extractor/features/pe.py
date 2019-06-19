@@ -204,8 +204,7 @@ class Optional_Header(BaseFeature):
 
 class Libraries(BaseFeature):
     """
-    Get the number of imported libraries and a comma separated list
-    of all the imported libraries.
+    Get the number and the list of all the imported libraries.
     """
 
     name = 'libraries'
@@ -215,7 +214,7 @@ class Libraries(BaseFeature):
         libraries = [lib.name for lib in lief_file.imports]
         features = {
             'lib_counts': len(libraries),
-            'libs': ', '.join(libraries),
+            'libs': libraries,
         }
         return features
 

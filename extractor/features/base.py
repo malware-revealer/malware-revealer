@@ -90,7 +90,7 @@ class FileSize(BaseFeature):
 
 
 class URLs(BaseFeature):
-    """Get the number of urls and a comma separated list of all urls."""
+    """Get the number and the list of all urls."""
 
     name = 'urls'
 
@@ -100,14 +100,14 @@ class URLs(BaseFeature):
         urls = re.findall(URLs.RE_URL, raw_exe)
         features = {
             'url_counts': len(urls),
-            'urls': b', '.join(urls).decode(),
+            'urls': [url.decode() for url in urls],
         }
         return features
 
 
 class ImportedFunctions(BaseFeature):
     """
-    Get the number and a comma separated list of imported funcitons.
+    Get the number and the list of imported funcitons.
     """
 
     name = 'imported_functions'
@@ -124,7 +124,7 @@ class ImportedFunctions(BaseFeature):
 
 class ExportedFunctions(BaseFeature):
     """
-    Get the number and a comma separated list of exported funcitons.
+    Get the number and the list of exported funcitons.
     """
 
     name = 'exported_functions'
