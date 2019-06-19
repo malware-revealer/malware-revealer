@@ -20,6 +20,8 @@ class TestExtractor(unittest.TestCase):
                                     'pe.Libraries',
                                     'base.FileSize',
                                     'base.URLs',
+                                    'base.ImportedFunctions',
+                                    'base.ExportedFunctions',
                                     ])
         self.assertEqual(
             sorted(feature_list),

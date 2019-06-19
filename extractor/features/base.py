@@ -7,6 +7,8 @@ import re
 from PIL import Image
 from math import sqrt
 
+from .utils import lief_from_raw
+
 
 class BaseFeature(object):
     """
@@ -99,5 +101,67 @@ class URLs(BaseFeature):
         features = {
             'url_counts': len(urls),
             'urls': b', '.join(urls).decode(),
+        }
+        return features
+
+
+class ImportedFunctions(BaseFeature):
+    """
+    Get the number and a comma separated list of imported funcitons.
+    """
+
+    name = 'imported_functions'
+
+    def extract_features(self, raw_exe):
+        lief_file = lief_from_raw(raw_exe)
+        imported_functions = [func.name for func in lief_file.imported_functions]
+        features = {
+            'imported_functions_counts': len(imported_functions),
+            'imported_functions': imported_functions,
+        }
+        return features
+
+
+class ExportedFunctions(BaseFeature):
+    """
+    Get the number and a comma separated list of exported funcitons.
+    """
+
+    name = 'exported_functions'
+
+    def extract_features(self, raw_exe):
+        lief_file = lief_from_raw(raw_exe)
+        exported_functions = [func.name for func in lief_file.exported_functions]
+        features = {
+            'exported_functions_counts': len(exported_functions),
+            'exported_functions': exported_functions,
+        }
+        return features
+
+
+class Strings(BaseFeature):
+    """Get the number of strings(+5 char), strings set, avrege length, paths set,
+    paths number ,registry and MZ headers number."""
+
+    name = 'Strings'
+
+    RE_STRING = br'[\w$-@.&+!*()]{5,}'
+    RE_PATH = br'[A-Z]:\\[\w\\\. ]*'
+    RE_REGISTRY = b'^HKEY_'
+    RE_MZ = b'^MZ'
+
+    def extract_features(self, raw_exe):
+        strings = re.findall(Strings.RE_STRING, raw_exe)
+        paths = re.findall(Strings.RE_PATH, raw_exe)
+        registry_names = re.findall(Strings.RE_REGISTRY, raw_exe)
+        MZ = re.findall(Strings.RE_MZ, raw_exe)
+        features = {
+            'strings_count': len(strings),
+            'printabales': set(b', '.join(strings).decode().split(",")),
+            'avg_length':sum([len(str) for str in strings])/len(strings),
+            'paths_count': len(paths),
+            'paths': set(b', '.join(paths).decode().split(",")),
+            'registry_count': len(registry_names),
+            'MZ': len(MZ),
         }
         return features

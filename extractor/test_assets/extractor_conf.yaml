@@ -4,6 +4,8 @@ features:
     - BinaryImage
     - FileSize
     - URLs
+    - ImportedFunctions
+    - ExportedFunctions
   pe:
     - GeneralFileInfo
     - Libraries

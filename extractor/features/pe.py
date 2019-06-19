@@ -1,5 +1,5 @@
 """
-ELF Feature Classes.
+PE Feature Classes.
 Contain feature classes that are proper to the PE format
 """
 
