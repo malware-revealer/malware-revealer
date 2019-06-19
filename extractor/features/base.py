@@ -114,7 +114,7 @@ class ImportedFunctions(BaseFeature):
 
     def extract_features(self, raw_exe):
         lief_file = lief_from_raw(raw_exe)
-        imported_functions = [func.name for func in lief_file.imported_functions]
+        imported_functions = [func for func in lief_file.imported_functions]
         features = {
             'imported_functions_counts': len(imported_functions),
             'imported_functions': imported_functions,
