@@ -4,14 +4,14 @@ ENV APP_PATH /opt/extractor/
 
 # Install requirements
 RUN apt-get update
-RUN apt-get install -y python3 python3-pip
+RUN apt-get install -y python3 python3-pip python3-yaml
 # Install python modules
-RUN pip3 install lief
-RUN apt-get install -y python3-yaml
-RUN pip3 install numpy
-RUN pip3 install Pillow
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Copy source files
 RUN mkdir $APP_PATH
 WORKDIR $APP_PATH
 COPY . $APP_PATH
+
+# Execute the extractor by default
+ENTRYPOINT ["python3", "extract.py"]
