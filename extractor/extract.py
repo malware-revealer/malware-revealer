@@ -33,4 +33,4 @@ if __name__ == '__main__':
 
     # Making extraction
     extractor = Extractor.new(conf_file, in_folder, out_folder)
-    extractor.extract()
+    extractor.extract_batch()

@@ -18,7 +18,12 @@ class Extractor(object):
         self.in_folder = in_folder
         self.out_folder = out_folder
 
-    def extract(self):
+    def extract_batch(self):
+        """
+        Extract features from all files from the in_folder to the out_folder
+        according to the features list.
+        """
+
         features = list(self.features.values())
 
         prepare_extraction(features, self.in_folder, self.out_folder)
@@ -33,6 +38,15 @@ class Extractor(object):
                 else:
                     features_dict.update(extracted_features)
             save_features_json(name, features_dict, label, self.out_folder)
+
+
+    def extract_one(self, executable):
+        """
+        Extract features from only one executable file according to
+        the features list.
+        """
+
+        pass
 
 
 def prepare_extraction(features, in_folder, out_folder):
