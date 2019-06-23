@@ -16,7 +16,7 @@ class Extraction(Resource):
         Extract features from an executable file.
         """
         executable = request.files['exec']
-        extractor_conf = None #request.post['conf']
+        extractor_conf = request.files['extractor_conf']
         # Return Something comprehensif
         return None
 
