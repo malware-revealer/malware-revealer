@@ -40,13 +40,38 @@ class Extractor(object):
             save_features_json(name, features_dict, label, self.out_folder)
 
 
-    def extract_one(self, executable):
-        """
-        Extract features from only one executable file according to
-        the features list.
-        """
+def extract_one(exe, conf):
+    """
+    Extract features from only one executable file according to
+    the features list.
 
-        pass
+    params:
+    executable is the executable to extract features from represented as bytes.
+    conf is the extractor configuration represented as a dictionnary.
+    """
+
+    features = get_features_from_conf(conf)
+    features = list(features.values())
+
+    features_dict = {}
+    images = {}
+    for feature in features:
+        extracted_features = feature().extract_features(exe)
+        if feature.is_image:
+            image = extracted_features['image']
+            image_format = extracted_features['image_format']
+            images.update(
+                {
+                    'name': feature.name,
+                    'image': image,
+                    'image_format': image_format,
+                }
+            )
+
+        else:
+            features_dict.update(extracted_features)
+
+    return features_dict, images
 
 
 def prepare_extraction(features, in_folder, out_folder):
@@ -123,22 +148,11 @@ def create_dir_if_does_not_exist(folder):
         os.makedirs(folder)
 
 
-def new(conf_file, in_folder, out_folder):
+def get_features_from_conf(conf):
     """
-    Build an extractor according to the configuration file which list
-    feature classes that should be used.
-
-    params:
-    in_folder contains a subfolder of executables for each label.
-    out_folder will contain two main folders, json/ and image/.
-      - json/ will contain a subfolder of extracted features for each label
-        - image/ will contain a subfolder for each type of image extraction
-          - those folders will then contain a subfolder of images for each label
+    Get the feature classes defined by the conf file.
+    conf should be an opened file.
     """
-
-    stream = open(conf_file)
-    conf = yaml.load(stream)
-    stream.close()
 
     features = {}
     for feature_module in conf["features"]:
@@ -157,6 +171,27 @@ def new(conf_file, in_folder, out_folder):
             except AttributeError as error:
                 # TODO: print a clear warning
                 print(error)
+    return features
+
+
+def new(conf_file, in_folder, out_folder):
+    """
+    Build an extractor according to the configuration file which list
+    feature classes that should be used.
+
+    params:
+    in_folder contains a subfolder of executables for each label.
+    out_folder will contain two main folders, json/ and image/.
+      - json/ will contain a subfolder of extracted features for each label
+        - image/ will contain a subfolder for each type of image extraction
+          - those folders will then contain a subfolder of images for each label
+    """
+
+    stream = open(conf_file)
+    conf = yaml.load(stream)
+    stream.close()
+
+    features = get_features_from_conf(conf)
 
     # Prepare folder variable
     curdir = os.path.realpath(os.path.curdir)
