@@ -157,10 +157,10 @@ class Strings(BaseFeature):
         MZ = re.findall(Strings.RE_MZ, raw_exe)
         features = {
             'strings_count': len(strings),
-            'printabales': set(b', '.join(strings).decode().split(",")),
+            'printabales': list(map(lambda item: item.decode(), strings)),
             'avg_length':sum([len(str) for str in strings])/len(strings),
             'paths_count': len(paths),
-            'paths': set(b', '.join(paths).decode().split(",")),
+            'paths': list(map(lambda item: item.decode(), paths)),
             'registry_count': len(registry_names),
             'MZ': len(MZ),
         }
