@@ -3,6 +3,8 @@ from flask_restful import Resource, Api
 from flask_cors import CORS
 from Extractor import extract_one
 import yaml
+import os
+from time import time
 
 
 app = Flask(__name__)
@@ -11,9 +13,32 @@ api = Api(app)
 # Allow all origin to access the API
 CORS(app)
 
+IMAGES_DIR = os.path.join("data", "images")
 
-def prepare_response(features):
-    pass
+
+def save_image(name, image, format):
+    """
+    Take a Pillow image and save it using the format and name provided.
+    """
+
+    ts = int(time())
+    file_name = '{name}{time}.{format}'
+    file_name = file_name.format(name=name, time=ts, format=format)
+    image.save(os.path.join(IMAGES_DIR, file_name))
+
+    return "/images/" + file_name
+
+def prepare_response(features, images):
+    image_urls = {}
+    for image_name in images.keys():
+        image_value = images[image_name]
+        image = image_value['image']
+        image_format = image_value['image_format']
+        url = save_image(image_name, image, image_format)
+        image_urls[image_name] = url
+
+    features['image_urls'] = image_urls
+    return features
 
 
 class Extraction(Resource):
@@ -26,8 +51,8 @@ class Extraction(Resource):
 
         exec = executable.read()
         conf = yaml.load(extractor_conf)
-        features = extract_one(exec, conf)
-        resp = prepare_response(features)
+        features, images = extract_one(exec, conf)
+        resp = prepare_response(features, images)
         return resp
 
 
