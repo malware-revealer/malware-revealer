@@ -107,7 +107,7 @@ class URLs(BaseFeature):
 
 class ImportedFunctions(BaseFeature):
     """
-    Get the number and the list of imported funcitons.
+    Get the number and the list of imported functions.
     """
 
     name = 'imported_functions'
@@ -124,7 +124,7 @@ class ImportedFunctions(BaseFeature):
 
 class ExportedFunctions(BaseFeature):
     """
-    Get the number and the list of exported funcitons.
+    Get the number and the list of exported functions.
     """
 
     name = 'exported_functions'
