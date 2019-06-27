@@ -1,4 +1,6 @@
 import unittest
+import json
+import Extractor
 
 class TestExtractor(unittest.TestCase):
 
@@ -6,7 +8,7 @@ class TestExtractor(unittest.TestCase):
         """
         Test the extractor creation using a test conf file.
         """
-        import Extractor
+
         conf_file = "test_assets/extractor_conf.yaml"
         in_folder = "test_assets/executables"
         out_folder = "test_assets/extracted_features"
@@ -32,57 +34,60 @@ class TestExtractor(unittest.TestCase):
 
     def test_general_file_info(self):
         """
-        Testing the file general informations extraction using a test conf file.
+        Testing the file general informations extraction .
         """
-        import Extractor
         conf_file = "test_assets/extractor_confs/general_file_info_conf.yaml"
         in_folder = "test_assets/executables"
         out_folder = "test_assets/extracted_features/general_file_info"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        expected_feature_dict = {
-                                "virtual_size": 2674688,
-                                "name": "",
-                                "sizeof_PFheader": 1024,
-                                "signature": 0,
-                                "has_debug": 0, 
-                                "exports": 0, 
-                                "imports": 91, 
-                                "has_relocations": 0, 
-                                "has_resources": 1, 
-                                "has_tls": 0, 
-                                "symbols": 0
-                                }
+        file = open("/extractor/test_assest/expected_features_dicts/general_file_info.json","r")
+        expected_feature_dict = json.load(file)
+
         self.assertEqual(
-            sorted(feature_dict),
+            features_dict,
             expected_feature_dict,
-            "Imported features don't match"
+            "extracted general file informations don't match"
             )
 
 
     def test_msdos_header(self):
         """
-        Test the extractor creation using a test conf file.
+        Testing the Msdos Header extraction .
         """
-        import Extractor
         conf_file = "test_assets/extractor_confs/msdos_header_conf.yaml"
         in_folder = "test_assets/executables"
         out_folder = "test_assets/extracted_features/msdos_header"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        expected_feature_dict = {
-                                "magic": 23117, 
-                                "pages_file": 3, 
-                                "checksum": 0, 
-                                "oem_id": 0, 
-                                "oem_info": 0
-                                }
+        file = open("/extractor/test_assest/expected_features_dicts/msdos_header.json","r")
+        expected_feature_dict = json.load(file)
+
         self.assertEqual(
-            sorted(feature_dict),
+            features_dict,
             expected_feature_dict,
-            "Imported features don't match"
+            "msdos header dosen't match"
+            )
+            
+
+    def test_optional_header(self):
+        """
+        Testing the optional header extraction using a test conf file.
+        """
+        conf_file = "test_assets/extractor_confs/optional_header_conf.yaml"
+        in_folder = "test_assets/executables"
+        out_folder = "test_assets/extracted_features/optional_header"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+        features_dict = extractor.features
+        file = open("/extractor/test_assest/expected_features_dicts/optional_header.json","r")
+        expected_feature_dict = json.load(file)
+        self.assertEqual(
+            features_dict,
+            expected_feature_dict,
+            "Optional Header dosen't match"
             )                         
 
 

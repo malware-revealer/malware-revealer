@@ -182,7 +182,7 @@ class OptionalHeader(BaseFeature):
         if lief_file is None:
             return features
 
-        features['subsystem'] = str(lief_file.optional_header.subsystem)
+        #features['subsystem'] = str(lief_file.optional_header.subsystem)
         features['dll_characteristics'] = [str(dll_c).split('.')[-1] for dll_c in lief_file.optional_header.dll_characteristics_lists]
         features['magic'] = str(lief_file.optional_header.magic).split('.')[-1]
         features['major_image_version'] = lief_file.optional_header.major_image_version
