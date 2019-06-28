@@ -62,9 +62,10 @@ def extract_one(exe, conf):
             image_format = extracted_features['image_format']
             images.update(
                 {
-                    'name': feature.name,
-                    'image': image,
-                    'image_format': image_format,
+                    feature.name: {
+                        'image': image,
+                        'image_format': image_format,
+                    }
                 }
             )
 

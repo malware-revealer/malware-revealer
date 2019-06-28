@@ -12,7 +12,7 @@ from lief.PE import SECTION_CHARACTERISTICS as SC
 class GeneralFileInfo(BaseFeature):
     """
     this class is used to extract the General information from the PE file,
-    such as the file size, number of export,import functions ...etc
+    such as the file size, number of export,import functions ...etc 
     """
     name = "General information"
     dim = 11
@@ -20,23 +20,20 @@ class GeneralFileInfo(BaseFeature):
     def __init__(self):
         super(BaseFeature, self).__init__()
 
-    def can_extract(self, raw_exe):
+    def can_extract(self, lief_file):
         """
         we return True if the lief_file is not None, but we can go farther,
         and return true/false for every feature in this section, like a dict {'size':true,'imports':False .... etc}
         """
-        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return False
         return True
 
-    def extract_features(self, raw_exe):
+    def extracted_features(self, lief_file):
         """
-        we extract the the general informations here
+        we extract the the general informations here 
         """
-        lief_file = lief_from_raw(raw_exe)
-        if lief_file is None:
-            return {
+        features={
                 'virtual_size': 0,
                 'name': '',
                 'sizeof_PFheader': 0,
@@ -49,84 +46,83 @@ class GeneralFileInfo(BaseFeature):
                 'has_tls': 0,
                 'symbols': 0
             }
+        if lief_file is None:
+            return features
 
-        else:
-            return{
-                'virtual_size': lief_file.virtual_size,
-                'name': lief_file.name,
-                'sizeof_PFheader': lief_file.sizeof_headers,
-                'signature': int(lief_file.has_signature),
-                'has_debug': int(lief_file.has_debug),
-                'exports': len(lief_file.exported_functions),
-                'imports': len(lief_file.imported_functions),
-                'has_relocations': int(lief_file.has_relocations),
-                'has_resources': int(lief_file.has_resources),
-                'has_tls': int(lief_file.has_tls),
-                'symbols': len(lief_file.symbols)
-            }
+        features['virtual_size'] =  lief_file.virtual_size
+        features['name'] =  lief_file.name
+        features['sizeof_PFheader'] = lief_file.sizeof_headers
+        features['signature'] =  int(lief_file.has_signature)
+        features['has_debug'] =  int(lief_file.has_debug)
+        features['exports'] =  len(lief_file.exported_functions)
+        features['imports'] = len(lief_file.imported_functions)
+        features['has_relocations'] = int(lief_file.has_relocations)
+        features['has_resources'] = int(lief_file.has_resources)
+        features['has_tls'] =  int(lief_file.has_tls)
+        features['symbols'] = len(lief_file.symbols)
+
+        return features    
 
 
-class MSDOS_Header(BaseFeature):
+class MSDOSHeader(BaseFeature):
     name = "MS-DOS Header"
     dim = 5
 
     def __init__(self):
         super(BaseFeature, self).__init__()
 
-    def can_extract(self, raw_exe):
+    def can_extract(self, lief_file):
         """
         we return True if the lief_file is not None, but we can go farther,
         and return true/false for every feature in this section.
         """
-        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return False
         return True
 
-    def extract_features(self, raw_exe):
+    def extracted_features(self, lief_file):
         """
-        we extract all the needed header informations here
-        """
-        lief_file = lief_from_raw(raw_exe)
-        if lief_file is None:
-            return{
+        we extract all the needed header informations here 
+        """ 
+        features = {
                 'magic': None,
                 'pages_file': 0,
                 'checksum': 0,
                 'oem_id': 0,
                 'oem_info': 0
             }
-        else:
-            return{
-                'magic': lief_file.dos_header.magic,
-                'pages_file': lief_file.dos_header.file_size_in_pages,
-                'checksum': lief_file.dos_header.checksum,
-                'oem_id': lief_file.dos_header.oem_id,
-                'oem_info': lief_file.dos_header.oem_info
-            }
+
+        if lief_file is None:
+            return features
+        
+        features['magic'] = lief_file.dos_header.magic
+        features['pages_file'] = lief_file.dos_header.file_size_in_pages
+        features['checksum'] = lief_file.dos_header.checksum
+        features['oem_id'] = lief_file.dos_header.oem_id
+        features['oem_info'] = lief_file.dos_header.oem_info
+        return features
+        
 
 
-class PE_Header(BaseFeature):
+class PEHeader(BaseFeature):
     name = "PE Header"
     dim = 6
 
     def __init__(self):
         super(BaseFeature, self).__init__()
 
-    def can_extract(self, raw_exe):
+    def can_extract(self, lief_file):
         """
         we return True if the lief_file is not None, but we can go farther,
         and return true/false for every feature in this section.
         """
-        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return False
         return True
 
-    def extract_features(self, raw_exe):
-        lief_file = lief_from_raw(raw_exe)
-        if lief_file is None:
-            return {
+    def extracted_features(self, lief_file):
+        
+        features =  {
                 'timestamp': 0,
                 'machine': "",
                 'characteristics': [],
@@ -134,40 +130,40 @@ class PE_Header(BaseFeature):
                 'numberof_symbols': 0,
                 'PE_signature': None
             }
-        else:
-            return {
-                'timestamp': lief_file.header.time_date_stamps,
+        if lief_file is None:
+            return features
+
+        features['timestamp'] = lief_file.header.time_date_stamps
                 # the lief machine type is not a string it gives something like this MACHINE_TYPES.AMD64
-                'machine':  str(lief_file.header.machine).split('.')[-1],
-                'characteristics': [str(c).split('.')[-1] for c in lief_file.header.characteristics_list],
-                'numberof_sections': lief_file.header.numberof_sections,
-                'numberof_symbols': lief_file.header.numberof_symbols,
+        features['machine'] =  str(lief_file.header.machine).split('.')[-1]
+        features['characteristics'] = [str(c).split('.')[-1] for c in lief_file.header.characteristics_list]
+        features['numberof_sections'] = lief_file.header.numberof_sections
+        features['numberof_symbols'] = lief_file.header.numberof_symbols
                 # the PE signature should be [80,69,0,0] it means PE\0\0
-                'PE_signature': lief_file.header.signature
-            }
+        features['PE_signature'] = lief_file.header.signature
+        
+        return features
 
 
-class Optional_Header(BaseFeature):
+class OptionalHeader(BaseFeature):
     name = "Optional_Header"
     dim = 14
 
     def __init__(self):
         super(BaseFeature, self).__init__()
 
-    def can_extract(self, raw_exe):
+    def can_extract(self, lief_file):
         """
         we return True if the lief_file is not None, but we can go farther,
         and return true/false for every feature in this section.
         """
-        lief_file = lief_from_raw(raw_exe)
         if lief_file is None:
             return False
         return True
 
-    def extract_features(self, raw_exe):
-        lief_file = lief_from_raw(raw_exe)
-        if lief_file is None:
-            return {
+    def extracted_features(self, lief_file):
+        
+        features = {
                 'subsystem': "",
                 'dll_characteristics': [],
                 'magic': "",
@@ -183,23 +179,25 @@ class Optional_Header(BaseFeature):
                 'sizeof_headers': 0,
                 'sizeof_heap_commit': 0
             }
-        else:
-            return {
-                'subsystem': lief_file.optional_header.subsystem,
-                'dll_characteristics': [str(dll_c).split('.')[-1] for dll_c in lief_file.optional_header.dll_characteristics_lists],
-                'magic': str(lief_file.optional_header.magic).split('.')[-1],
-                'major_image_version': lief_file.optional_header.major_image_version,
-                'minor_image_version': lief_file.optional_header.minor_image_version,
-                'major_linker_version': lief_file.optional_header.major_linker_version,
-                'minor_linker_version': lief_file.optional_header.minor_linker_version,
-                'major_operating_system_version': lief_file.optional_header.major_operating_system_version,
-                'minor_operating_system_version': lief_file.optional_header.minor_operating_system_version,
-                'major_subsystem_version': lief_file.optional_header.major_subsystem_version,
-                'minor_subsystem_version': lief_file.optional_header.minor_subsystem_version,
-                'sizeof_code': lief_file.optional_header.sizeof_code,
-                'sizeof_headers': lief_file.optional_header.sizeof_headers,
-                'sizeof_heap_commit': lief_file.optional_header.sizeof_heap_commit
-            }
+        if lief_file is None:
+            return features
+
+        features['subsystem'] = str(lief_file.optional_header.subsystem)
+        features['dll_characteristics'] = [str(dll_c).split('.')[-1] for dll_c in lief_file.optional_header.dll_characteristics_lists]
+        features['magic'] = str(lief_file.optional_header.magic).split('.')[-1]
+        features['major_image_version'] = lief_file.optional_header.major_image_version
+        features['minor_image_version'] =  lief_file.optional_header.minor_image_version
+        features['major_linker_version'] = lief_file.optional_header.major_linker_version
+        features['minor_linker_version'] = lief_file.optional_header.minor_linker_version
+        features['major_operating_system_version'] = lief_file.optional_header.major_operating_system_version
+        features['minor_operating_system_version'] = lief_file.optional_header.minor_operating_system_version
+        features['major_subsystem_version'] = lief_file.optional_header.major_subsystem_version
+        features['minor_subsystem_version'] = lief_file.optional_header.minor_subsystem_version
+        features['sizeof_code'] = lief_file.optional_header.sizeof_code
+        features['sizeof_headers'] = lief_file.optional_header.sizeof_headers
+        features['sizeof_heap_commit'] = lief_file.optional_header.sizeof_heap_commit
+        
+        return features
 
 class Libraries(BaseFeature):
     """

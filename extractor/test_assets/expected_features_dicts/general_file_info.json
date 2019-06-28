@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"virtual_size": 2674688, "name": "", "sizeof_PFheader": 1024, "signature": 0, "has_debug": 0, "exports": 0, "imports": 91, "has_relocations": 0, "has_resources": 1, "has_tls": 0, "symbols": 0}
+=======
+{"virtual_size": 2674688,"name": "","sizeof_PFheader": 1024,"signature": 0,"has_debug": 0,"exports": 0,"imports": 91,"has_relocations": 0,"has_resources": 1,"has_tls": 0,"symbols": 0}
+>>>>>>> 4c2165f715b2df1f6f72f9c5ec290458f0e6bd6f
