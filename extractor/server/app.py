@@ -65,4 +65,8 @@ def send_js(path):
 
 
 if __name__ == '__main__':
+    # Prepate folder to store images
+    if not os.path.exists(IMAGES_DIR):
+        os.makedirs(IMAGES_DIR)
+        
     app.run('0.0.0.0', 80)
