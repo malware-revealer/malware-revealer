@@ -201,7 +201,6 @@ class Optional_Header(BaseFeature):
                 'sizeof_heap_commit': lief_file.optional_header.sizeof_heap_commit
             }
 
-
 class Libraries(BaseFeature):
     """
     Get the number and the list of all the imported libraries.
