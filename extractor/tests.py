@@ -8,10 +8,6 @@ class TestExtractor(unittest.TestCase):
         """
         Test the extractor creation using a test conf file.
         """
-<<<<<<< HEAD
-=======
-
->>>>>>> 4c2165f715b2df1f6f72f9c5ec290458f0e6bd6f
         conf_file = "test_assets/extractor_conf.yaml"
         in_folder = "test_assets/executables"
         out_folder = "test_assets/extracted_features"
@@ -152,6 +148,63 @@ class TestExtractor(unittest.TestCase):
             "Optional Header dosen't match"
             )                         
 
+    def test_byte_counts(self):
+        """
+        Testing the byte counts extraction using a test conf file.
+        """
+        conf_file = "test_assets/extractor_confs/byte_counts_conf.yaml"
+        in_folder = "test_assets/executables"
+        out_folder = "test_assets/extracted_features/byte_counts"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+        features_dict = extractor.features
+        file = open("test_assets/expected_features_dicts/byte_counts.yaml.json","r")
+        expected_feature_dict = json.load(file)
+        self.assertEqual(
+            features_dict,
+            expected_feature_dict,
+            "Byte Counts dosen't match"
+            )
+
+    def test_binary_image(self):
+        """
+        Testing the binary image extraction using a test conf file.
+        """
+        
+        from PIL import Image, ImageChops
+
+        """
+        # Funtion that compares the differences of the two images .
+        @param1 image, @param2 image   (extracted & expected images)
+
+        @return an image (difference between pixels)
+        if they are equal then it returns a black image     
+        """
+        def assertImage(pic_1,  pic_2):
+            diff = ImageChops.difference(pic_1, pic_2)
+            theDifferenceImage = diff.convert('RGB')
+            theDifferenceImage.paste(pic_2, mask=diff)
+            return theDifferenceImage
+
+        conf_file = "test_assets/extractor_confs/binary_image_conf.yaml"
+        in_folder = "test_assets/executables"
+        out_folder = "test_assets/extracted_features/binary_image"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+        extracted_image = extractor.features["image"]
+        expected_image = Image.open("test_assets/expected_features_images/binary_image.png")
+        
+        difference = assertImage(extracted_image, expected_image)
+
+        """
+        # Verifying if all pixels are black it return 'None' if they are 
+        # if not then we print an error msg
+        """
+
+        if not difference.getbbox() :
+            pass
+        else :
+            print("Binary images don't match")    
 
 if __name__ == '__main__':
     unittest.main()
