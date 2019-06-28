@@ -8,10 +8,6 @@ class TestExtractor(unittest.TestCase):
         """
         Test the extractor creation using a test conf file.
         """
-<<<<<<< HEAD
-=======
-
->>>>>>> 4c2165f715b2df1f6f72f9c5ec290458f0e6bd6f
         conf_file = "test_assets/extractor_conf.yaml"
         in_folder = "test_assets/executables"
         out_folder = "test_assets/extracted_features"
@@ -33,7 +29,7 @@ class TestExtractor(unittest.TestCase):
             expected_feature_list,
             "Imported features don't match"
             )
-        
+
     def test_PE_Header(self):
         """
         Test the extracted features of Pe Header !
@@ -73,7 +69,7 @@ class TestExtractor(unittest.TestCase):
             expected_feature_dict,
             "The extracted features of Libraries don't match"
             )
-    
+
 
     def test_Sections(self):
         """
@@ -132,7 +128,7 @@ class TestExtractor(unittest.TestCase):
             expected_feature_dict,
             "msdos header dosen't match"
             )
-            
+
 
     def test_optional_header(self):
         """
@@ -187,7 +183,7 @@ class TestExtractor(unittest.TestCase):
             features_dict,
             expected_feature_dict,
             "urls don't match"
-            )                                 
+            )
 
 
     def test_imported_functions(self):
@@ -209,6 +205,24 @@ class TestExtractor(unittest.TestCase):
             )
 
 
+    def test_byte_counts(self):
+        """
+        Testing the byte counts extraction using a test conf file.
+        """
+        conf_file = "test_assets/extractor_confs/byte_counts_conf.yaml"
+        in_folder = "test_assets/executables"
+        out_folder = "test_assets/extracted_features/byte_counts"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+        features_dict = extractor.features
+        file = open("test_assets/expected_features_dicts/byte_counts.yaml.json","r")
+        expected_feature_dict = json.load(file)
+        self.assertEqual(
+            features_dict,
+            expected_feature_dict,
+            "Byte Counts dosen't match"
+            )
+
     def test_exported_functions(self):
         """
         Testing exported functions extarction using a test conf file.
@@ -227,6 +241,41 @@ class TestExtractor(unittest.TestCase):
             "exported functions don't match"
             )
 
+    def test_binary_image(self):
+        """
+        Testing the binary image extraction using a test conf file.
+        """
+
+        from PIL import Image, ImageChops
+
+        """
+        # Funtion that compares the differences of the two images .
+        @param1 image, @param2 image   (extracted & expected images)
+
+        @return an image (difference between pixels)
+        if they are equal then it returns a black image
+        """
+        def assertImage(pic_1,  pic_2):
+            diff = ImageChops.difference(pic_1, pic_2)
+            theDifferenceImage = diff.convert('RGB')
+            theDifferenceImage.paste(pic_2, mask=diff)
+            return theDifferenceImage
+
+        conf_file = "test_assets/extractor_confs/binary_image_conf.yaml"
+        in_folder = "test_assets/executables"
+        out_folder = "test_assets/extracted_features/binary_image"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+        extracted_image = extractor.features["image"]
+        expected_image = Image.open("test_assets/expected_features_images/binary_image.png")
+
+        difference = assertImage(extracted_image, expected_image)
+
+        """
+        #getbbox(): verifying if all pixels are black it return 'None' if they are
+        # if not then the pixels where they are changed
+        """
+        self.assertTrue(not difference.getbbox(), "Binary images don't match")
 
     def test_strings(self):
         """
@@ -244,7 +293,8 @@ class TestExtractor(unittest.TestCase):
             features_dict,
             expected_feature_dict,
             "strings don't match"
-            )                
+            )
+
 
 if __name__ == '__main__':
     unittest.main()
