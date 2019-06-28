@@ -41,11 +41,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         feature_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/pe_header.json" ,"rb")
-        expected_feature_dict = json.load(file)
-
+        with open("test_assets/expected_features_dicts/pe_header.json" ,"rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/example.json" ,"rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            feature_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "The extracted features of Pe Header don't match"
             )
@@ -61,11 +62,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         feature_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/libraries.json" ,"rb")
-        expected_feature_dict = json.load(file)
-
+        with open("test_assets/expected_features_dicts/libraries.json" ,"rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder +  "/json/0/example.json" ,"rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            feature_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "The extracted features of Libraries don't match"
             )
@@ -82,10 +84,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         feature_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/sections.json" ,"rb")
-        expected_feature_dict = json.load(file)
+        with open("test_assets/expected_features_dicts/sections.json" ,"rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/example.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            feature_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "The extracted features of Sections don't match"
             )
@@ -100,11 +104,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/general_file_info.json","r")
-        expected_feature_dict = json.load(file)
-
+        with open("test_assets/expected_features_dicts/general_file_info.json","rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/example.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            features_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "extracted general file informations don't match"
             )
@@ -120,11 +125,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/msdos_header.json","r")
-        expected_feature_dict = json.load(file)
-
+        with open("test_assets/expected_features_dicts/msdos_header.json","rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/example.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            features_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "msdos header dosen't match"
             )
@@ -140,10 +146,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/optional_header.json","r")
-        expected_feature_dict = json.load(file)
+        with open("test_assets/expected_features_dicts/optional_header.json","rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/example.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            features_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "Optional Header dosen't match"
             )
@@ -159,10 +167,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/file_size.json","r")
-        expected_feature_dict = json.load(file)
+        with open("test_assets/expected_features_dicts/file_size.json","rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/example.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            features_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "file size dosen't match"
             )
@@ -177,10 +187,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/urls.json","r")
-        expected_feature_dict = json.load(file)
+        with open("test_assets/expected_features_dicts/urls.json","rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/example.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            features_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "urls don't match"
             )
@@ -196,10 +208,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/imported_functions.json","r")
-        expected_feature_dict = json.load(file)
+        with open("test_assets/expected_features_dicts/imported_functions.json","rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/example.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            features_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "imported functions don't match"
             )
@@ -215,10 +229,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/byte_counts.yaml.json","r")
-        expected_feature_dict = json.load(file)
+        with open("test_assets/expected_features_dicts/byte_counts.json","rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/example.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            features_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "Byte Counts dosen't match"
             )
@@ -233,10 +249,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/exported_functions.json","r")
-        expected_feature_dict = json.load(file)
+        with open("test_assets/expected_features_dicts/exported_functions.json","rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/example.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            features_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "exported functions don't match"
             )
@@ -266,9 +284,9 @@ class TestExtractor(unittest.TestCase):
         out_folder = "test_assets/extracted_features/binary_image"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
-        extracted_image = extractor.features["image"]
-        expected_image = Image.open("test_assets/expected_features_images/binary_image.png")
-
+        extracted_image_features = extractor.features
+        extracted_image =  Image.open("test_assets/expected_features_images/binary_image.png")
+        expected_image = Image.open(out_folder + "/image/binary_image/0/example.png")
         difference = assertImage(extracted_image, expected_image)
 
         """
@@ -287,10 +305,12 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("test_assets/expected_features_dicts/strings.json","r")
-        expected_feature_dict = json.load(file)
+        with open("test_assets/expected_features_dicts/strings.json","rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/example.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
         self.assertEqual(
-            features_dict,
+            extracted_feature_dict,
             expected_feature_dict,
             "strings don't match"
             )
