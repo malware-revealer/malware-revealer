@@ -42,7 +42,7 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("/extractor/test_assest/expected_features_dicts/general_file_info.json","r")
+        file = open("test_assets/expected_features_dicts/general_file_info.json","r")
         expected_feature_dict = json.load(file)
 
         self.assertEqual(
@@ -62,7 +62,7 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("/extractor/test_assest/expected_features_dicts/msdos_header.json","r")
+        file = open("test_assets/expected_features_dicts/msdos_header.json","r")
         expected_feature_dict = json.load(file)
 
         self.assertEqual(
@@ -82,7 +82,7 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
         features_dict = extractor.features
-        file = open("/extractor/test_assest/expected_features_dicts/optional_header.json","r")
+        file = open("test_assets/expected_features_dicts/optional_header.json","r")
         expected_feature_dict = json.load(file)
         self.assertEqual(
             features_dict,
