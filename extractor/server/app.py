@@ -25,7 +25,7 @@ def save_image(name, image, format):
     file_name = '{name}{time}.{format}'
     file_name = file_name.format(name=name, time=ts, format=format)
     image.save(os.path.join(IMAGES_DIR, file_name))
-    url = '/{image_dir}/{file_name}'
+    url = 'http://extractor/{image_dir}/{file_name}'
 
     return url.format(image_dir=IMAGES_DIR, file_name=file_name)
 
