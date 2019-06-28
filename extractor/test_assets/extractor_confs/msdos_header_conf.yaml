@@ -1,0 +1,3 @@
+features:
+  pe:
+    - MSDOS_Header
