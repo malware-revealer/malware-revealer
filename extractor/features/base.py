@@ -17,7 +17,6 @@ class BaseFeature(object):
     """
 
     name = ''
-    dim = 0
     is_image = False
 
     def can_extract(self, raw_exe):

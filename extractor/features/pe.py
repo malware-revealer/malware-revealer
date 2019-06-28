@@ -12,10 +12,9 @@ from lief.PE import SECTION_CHARACTERISTICS as SC
 class GeneralFileInfo(BaseFeature):
     """
     this class is used to extract the General information from the PE file,
-    such as the file size, number of export,import functions ...etc 
+    such as the file size, number of export,import functions ...etc
     """
     name = "General information"
-    dim = 11
 
     def __init__(self):
         super(BaseFeature, self).__init__()
@@ -31,7 +30,7 @@ class GeneralFileInfo(BaseFeature):
 
     def extracted_features(self, lief_file):
         """
-        we extract the the general informations here 
+        we extract the the general informations here
         """
         features={
                 'virtual_size': 0,
@@ -61,12 +60,11 @@ class GeneralFileInfo(BaseFeature):
         features['has_tls'] =  int(lief_file.has_tls)
         features['symbols'] = len(lief_file.symbols)
 
-        return features    
+        return features
 
 
 class MSDOSHeader(BaseFeature):
     name = "MS-DOS Header"
-    dim = 5
 
     def __init__(self):
         super(BaseFeature, self).__init__()
@@ -82,8 +80,8 @@ class MSDOSHeader(BaseFeature):
 
     def extracted_features(self, lief_file):
         """
-        we extract all the needed header informations here 
-        """ 
+        we extract all the needed header informations here
+        """
         features = {
                 'magic': None,
                 'pages_file': 0,
@@ -94,19 +92,18 @@ class MSDOSHeader(BaseFeature):
 
         if lief_file is None:
             return features
-        
+
         features['magic'] = lief_file.dos_header.magic
         features['pages_file'] = lief_file.dos_header.file_size_in_pages
         features['checksum'] = lief_file.dos_header.checksum
         features['oem_id'] = lief_file.dos_header.oem_id
         features['oem_info'] = lief_file.dos_header.oem_info
         return features
-        
+
 
 
 class PEHeader(BaseFeature):
     name = "PE Header"
-    dim = 6
 
     def __init__(self):
         super(BaseFeature, self).__init__()
@@ -121,7 +118,7 @@ class PEHeader(BaseFeature):
         return True
 
     def extracted_features(self, lief_file):
-        
+
         features =  {
                 'timestamp': 0,
                 'machine': "",
@@ -141,13 +138,12 @@ class PEHeader(BaseFeature):
         features['numberof_symbols'] = lief_file.header.numberof_symbols
                 # the PE signature should be [80,69,0,0] it means PE\0\0
         features['PE_signature'] = lief_file.header.signature
-        
+
         return features
 
 
 class OptionalHeader(BaseFeature):
     name = "Optional_Header"
-    dim = 14
 
     def __init__(self):
         super(BaseFeature, self).__init__()
@@ -162,7 +158,7 @@ class OptionalHeader(BaseFeature):
         return True
 
     def extracted_features(self, lief_file):
-        
+
         features = {
                 'subsystem': "",
                 'dll_characteristics': [],
@@ -196,7 +192,7 @@ class OptionalHeader(BaseFeature):
         features['sizeof_code'] = lief_file.optional_header.sizeof_code
         features['sizeof_headers'] = lief_file.optional_header.sizeof_headers
         features['sizeof_heap_commit'] = lief_file.optional_header.sizeof_heap_commit
-        
+
         return features
 
 class Libraries(BaseFeature):
