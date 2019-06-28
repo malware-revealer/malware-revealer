@@ -272,14 +272,10 @@ class TestExtractor(unittest.TestCase):
         difference = assertImage(extracted_image, expected_image)
 
         """
-        # Verifying if all pixels are black it return 'None' if they are
-        # if not then we print an error msg
+        #getbbox(): verifying if all pixels are black it return 'None' if they are
+        # if not then the pixels where they are changed
         """
-
-        if not difference.getbbox() :
-            pass
-        else :
-            print("Binary images don't match")
+        self.assertTrue(not difference.getbbox(), "Binary images don't match")
 
     def test_strings(self):
         """
