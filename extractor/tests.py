@@ -29,7 +29,7 @@ class TestExtractor(unittest.TestCase):
             expected_feature_list,
             "Imported features don't match"
             )
-        
+
     def test_PE_Header(self):
         """
         Test the extracted features of Pe Header !
@@ -69,7 +69,7 @@ class TestExtractor(unittest.TestCase):
             expected_feature_dict,
             "The extracted features of Libraries don't match"
             )
-    
+
 
     def test_Sections(self):
         """
@@ -128,7 +128,7 @@ class TestExtractor(unittest.TestCase):
             expected_feature_dict,
             "msdos header dosen't match"
             )
-            
+
 
     def test_optional_header(self):
         """
@@ -183,7 +183,7 @@ class TestExtractor(unittest.TestCase):
             features_dict,
             expected_feature_dict,
             "urls don't match"
-            )                                 
+            )
 
 
     def test_imported_functions(self):
@@ -205,7 +205,6 @@ class TestExtractor(unittest.TestCase):
             )
 
 
-<<<<<<< HEAD
     def test_byte_counts(self):
         """
         Testing the byte counts extraction using a test conf file.
@@ -217,7 +216,13 @@ class TestExtractor(unittest.TestCase):
         extractor.extract_batch()
         features_dict = extractor.features
         file = open("test_assets/expected_features_dicts/byte_counts.yaml.json","r")
-=======
+        expected_feature_dict = json.load(file)
+        self.assertEqual(
+            features_dict,
+            expected_feature_dict,
+            "Byte Counts dosen't match"
+            )
+
     def test_exported_functions(self):
         """
         Testing exported functions extarction using a test conf file.
@@ -229,20 +234,18 @@ class TestExtractor(unittest.TestCase):
         extractor.extract_batch()
         features_dict = extractor.features
         file = open("test_assets/expected_features_dicts/exported_functions.json","r")
->>>>>>> 460b2890274d6c57c5c47d10a2bb9a4a4d8ca528
         expected_feature_dict = json.load(file)
         self.assertEqual(
             features_dict,
             expected_feature_dict,
-<<<<<<< HEAD
-            "Byte Counts dosen't match"
+            "exported functions don't match"
             )
 
     def test_binary_image(self):
         """
         Testing the binary image extraction using a test conf file.
         """
-        
+
         from PIL import Image, ImageChops
 
         """
@@ -250,7 +253,7 @@ class TestExtractor(unittest.TestCase):
         @param1 image, @param2 image   (extracted & expected images)
 
         @return an image (difference between pixels)
-        if they are equal then it returns a black image     
+        if they are equal then it returns a black image
         """
         def assertImage(pic_1,  pic_2):
             diff = ImageChops.difference(pic_1, pic_2)
@@ -265,22 +268,18 @@ class TestExtractor(unittest.TestCase):
         extractor.extract_batch()
         extracted_image = extractor.features["image"]
         expected_image = Image.open("test_assets/expected_features_images/binary_image.png")
-        
+
         difference = assertImage(extracted_image, expected_image)
 
         """
-        # Verifying if all pixels are black it return 'None' if they are 
+        # Verifying if all pixels are black it return 'None' if they are
         # if not then we print an error msg
         """
 
         if not difference.getbbox() :
             pass
         else :
-            print("Binary images don't match")    
-=======
-            "exported functions don't match"
-            )
-
+            print("Binary images don't match")
 
     def test_strings(self):
         """
@@ -298,8 +297,8 @@ class TestExtractor(unittest.TestCase):
             features_dict,
             expected_feature_dict,
             "strings don't match"
-            )                
->>>>>>> 460b2890274d6c57c5c47d10a2bb9a4a4d8ca528
+            )
+
 
 if __name__ == '__main__':
     unittest.main()
