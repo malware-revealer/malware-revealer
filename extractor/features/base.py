@@ -17,7 +17,6 @@ class BaseFeature(object):
     """
 
     name = ''
-    dim = 0
     is_image = False
 
     def can_extract(self, raw_exe):
@@ -145,7 +144,7 @@ class Strings(BaseFeature):
 
     name = 'Strings'
 
-    RE_STRING = br'[\w$-@.&+!*()]{5,}'
+    RE_STRING = br'[\w$&!]{5,}'
     RE_PATH = br'[A-Z]:\\[\w\\\. ]*'
     RE_REGISTRY = b'^HKEY_'
     RE_MZ = b'^MZ'

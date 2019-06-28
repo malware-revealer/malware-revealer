@@ -146,8 +146,66 @@ class TestExtractor(unittest.TestCase):
             features_dict,
             expected_feature_dict,
             "Optional Header dosen't match"
-            )                         
+            )
 
+
+    def test_file_size(self):
+        """
+        Testing file size extarction using a test conf file.
+        """
+        conf_file = "test_assets/extractor_confs/file_size_conf.yaml"
+        in_folder = "test_assets/executables"
+        out_folder = "test_assets/extracted_features/file_size"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+        features_dict = extractor.features
+        file = open("test_assets/expected_features_dicts/file_size.json","r")
+        expected_feature_dict = json.load(file)
+        self.assertEqual(
+            features_dict,
+            expected_feature_dict,
+            "file size dosen't match"
+            )
+
+    def test_urls(self):
+        """
+        Testing URLs extarction using a test conf file.
+        """
+        conf_file = "test_assets/extractor_confs/urls_conf.yaml"
+        in_folder = "test_assets/executables"
+        out_folder = "test_assets/extracted_features/urls"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+        features_dict = extractor.features
+        file = open("test_assets/expected_features_dicts/urls.json","r")
+        expected_feature_dict = json.load(file)
+        self.assertEqual(
+            features_dict,
+            expected_feature_dict,
+            "urls don't match"
+            )                                 
+
+
+    def test_imported_functions(self):
+        """
+        Testing imported functions extarction using a test conf file.
+        """
+        conf_file = "test_assets/extractor_confs/imported_functions_conf.yaml"
+        in_folder = "test_assets/executables"
+        out_folder = "test_assets/extracted_features/imported_functions"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+        features_dict = extractor.features
+        file = open("test_assets/expected_features_dicts/imported_functions.json","r")
+        expected_feature_dict = json.load(file)
+        self.assertEqual(
+            features_dict,
+            expected_feature_dict,
+            "imported functions don't match"
+            )
+
+
+<<<<<<< HEAD
     def test_byte_counts(self):
         """
         Testing the byte counts extraction using a test conf file.
@@ -159,10 +217,24 @@ class TestExtractor(unittest.TestCase):
         extractor.extract_batch()
         features_dict = extractor.features
         file = open("test_assets/expected_features_dicts/byte_counts.yaml.json","r")
+=======
+    def test_exported_functions(self):
+        """
+        Testing exported functions extarction using a test conf file.
+        """
+        conf_file = "test_assets/extractor_confs/exported_functions_conf.yaml"
+        in_folder = "test_assets/executables"
+        out_folder = "test_assets/extracted_features/exported_functions"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+        features_dict = extractor.features
+        file = open("test_assets/expected_features_dicts/exported_functions.json","r")
+>>>>>>> 460b2890274d6c57c5c47d10a2bb9a4a4d8ca528
         expected_feature_dict = json.load(file)
         self.assertEqual(
             features_dict,
             expected_feature_dict,
+<<<<<<< HEAD
             "Byte Counts dosen't match"
             )
 
@@ -205,6 +277,29 @@ class TestExtractor(unittest.TestCase):
             pass
         else :
             print("Binary images don't match")    
+=======
+            "exported functions don't match"
+            )
+
+
+    def test_strings(self):
+        """
+        Testing exported functions extarction using a test conf file.
+        """
+        conf_file = "test_assets/extractor_confs/strings_conf.yaml"
+        in_folder = "test_assets/executables"
+        out_folder = "test_assets/extracted_features/strings"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+        features_dict = extractor.features
+        file = open("test_assets/expected_features_dicts/strings.json","r")
+        expected_feature_dict = json.load(file)
+        self.assertEqual(
+            features_dict,
+            expected_feature_dict,
+            "strings don't match"
+            )                
+>>>>>>> 460b2890274d6c57c5c47d10a2bb9a4a4d8ca528
 
 if __name__ == '__main__':
     unittest.main()
