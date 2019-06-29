@@ -38,7 +38,7 @@ class GeneralFileInfo(BaseFeature):
                 'virtual_size': 0,
                 'name': '',
                 'sizeof_PFheader': 0,
-                'has_signature': None,
+                'has_signature': False,
                 'has_debug': 0,
                 'exports': 0,
                 'imports': 0,
@@ -53,7 +53,7 @@ class GeneralFileInfo(BaseFeature):
         features['virtual_size'] =  lief_file.virtual_size
         features['name'] =  lief_file.name
         features['sizeof_PFheader'] = lief_file.sizeof_headers
-        features['signature'] =  int(lief_file.has_signature)
+        features['has_signature'] =  int(lief_file.has_signature)
         features['has_debug'] =  int(lief_file.has_debug)
         features['exports'] =  len(lief_file.exported_functions)
         features['imports'] = len(lief_file.imported_functions)
@@ -142,7 +142,7 @@ class PEHeader(BaseFeature):
         features['numberof_sections'] = lief_file.header.numberof_sections
         features['numberof_symbols'] = lief_file.header.numberof_symbols
                 # the PE signature should be [80,69,0,0] it means PE\0\0
-        features['PE_signature'] = lief_file.header.signature
+        features['PE_signature'] = lief_file.header.signature.original_signature
 
         return features
 
