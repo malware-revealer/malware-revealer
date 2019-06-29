@@ -142,7 +142,7 @@ class PEHeader(BaseFeature):
         features['numberof_sections'] = lief_file.header.numberof_sections
         features['numberof_symbols'] = lief_file.header.numberof_symbols
                 # the PE signature should be [80,69,0,0] it means PE\0\0
-        features['PE_signature'] = lief_file.header.signature.original_signature
+        features['PE_signature'] = lief_file.header.signature
 
         return features
 
