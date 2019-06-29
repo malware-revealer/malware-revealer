@@ -14,15 +14,20 @@ class TestExtractor(unittest.TestCase):
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         feature_list = list(extractor.features.keys())
         expected_feature_list = sorted([
-                                    'base.BinaryImage',
                                     'base.ByteCounts',
-                                    'elf.SomeELFFeature',
-                                    'pe.GeneralFileInfo',
-                                    'pe.Libraries',
+                                    'base.BinaryImage',
                                     'base.FileSize',
                                     'base.URLs',
                                     'base.ImportedFunctions',
                                     'base.ExportedFunctions',
+                                    'base.Strings',
+                                    'pe.GeneralFileInfo',
+                                    'pe.MSDOSHeader',
+                                    'pe.PEHeader',
+                                    'pe.OptionalHeader',
+                                    'pe.Libraries',
+                                    'pe.Sections',
+                                    'elf.SomeELFFeature',
                                     ])
         self.assertEqual(
             sorted(feature_list),
