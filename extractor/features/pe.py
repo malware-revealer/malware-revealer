@@ -28,10 +28,12 @@ class GeneralFileInfo(BaseFeature):
             return False
         return True
 
-    def extracted_features(self, lief_file):
+    def extract_features(self, raw_exe):
         """
         we extract the the general informations here
         """
+
+        lief_file = lief_from_raw(raw_exe)
         features={
                 'virtual_size': 0,
                 'name': '',
@@ -78,10 +80,12 @@ class MSDOSHeader(BaseFeature):
             return False
         return True
 
-    def extracted_features(self, lief_file):
+    def extract_features(self, raw_exe):
         """
         we extract all the needed header informations here
         """
+
+        lief_file = lief_from_raw(raw_exe)
         features = {
                 'magic': None,
                 'pages_file': 0,
@@ -117,8 +121,9 @@ class PEHeader(BaseFeature):
             return False
         return True
 
-    def extracted_features(self, lief_file):
+    def extract_features(self, raw_exe):
 
+        lief_file = lief_from_raw(raw_exe)
         features =  {
                 'timestamp': 0,
                 'machine': "",
@@ -157,8 +162,9 @@ class OptionalHeader(BaseFeature):
             return False
         return True
 
-    def extracted_features(self, lief_file):
+    def extract_features(self, raw_exe):
 
+        lief_file = lief_from_raw(raw_exe)
         features = {
                 'subsystem': "",
                 'dll_characteristics': [],
