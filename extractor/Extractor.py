@@ -2,6 +2,7 @@ import yaml
 import importlib
 import os
 import json
+import logging as log
 
 FEATURE_BASE_PACKAGE = "features"
 JSON_FOLDER = "json"
@@ -28,16 +29,25 @@ class Extractor(object):
 
         prepare_extraction(features, self.in_folder, self.out_folder)
         for name, exe, label in iter_executables(self.in_folder):
+            exe_path = "{label}/{name}".format(label=label, name=name)
+            log.info("Extracting features from %s", exe_path)
+
             features_dict = {}
             for feature in features:
-                extracted_features = feature().extract_features(exe)
-                if feature.is_image:
-                    image = extracted_features['image']
-                    image_format = extracted_features['image_format']
-                    save_features_image(name, image, image_format, label, feature.name, self.out_folder)
-                else:
-                    features_dict.update(extracted_features)
+                try:
+                    extracted_features = feature().extract_features(exe)
+                    if feature.is_image:
+                        image = extracted_features['image']
+                        image_format = extracted_features['image_format']
+                        save_features_image(name, image, image_format, label, feature.name, self.out_folder)
+                    else:
+                        features_dict.update(extracted_features)
+                except Exception as e:
+                    log.error("Error while using feature class %s", feature)
+                    log.exception(e)
+
             save_features_json(name, features_dict, label, self.out_folder)
+
 
 
 def extract_one(exe, conf):
