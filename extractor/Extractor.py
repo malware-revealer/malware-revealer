@@ -3,6 +3,8 @@ import importlib
 import os
 import json
 import logging as log
+from Crypto.Hash import MD5
+from binascii import hexlify
 
 FEATURE_BASE_PACKAGE = "features"
 JSON_FOLDER = "json"
@@ -29,6 +31,7 @@ class Extractor(object):
 
         prepare_extraction(features, self.in_folder, self.out_folder)
         for name, exe, label in iter_executables(self.in_folder):
+            name = get_file_name(exe)
             exe_path = "{label}/{name}".format(label=label, name=name)
             log.info("Extracting features from %s", exe_path)
 
@@ -83,6 +86,13 @@ def extract_one(exe, conf):
             features_dict.update(extracted_features)
 
     return features_dict, images
+
+
+def get_file_name(exe):
+    md5 = MD5.new(exe)
+    digest = md5.digest()
+    name = hexlify(digest).decode()
+    return name
 
 
 def prepare_extraction(features, in_folder, out_folder):

@@ -48,7 +48,7 @@ class TestExtractor(unittest.TestCase):
         feature_dict = extractor.features
         with open("test_assets/expected_features_dicts/pe_header.json" ,"rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder + "/json/0/example.json" ,"rb") as f2:
+        with open(out_folder + "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json" ,"rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
@@ -69,7 +69,7 @@ class TestExtractor(unittest.TestCase):
         feature_dict = extractor.features
         with open("test_assets/expected_features_dicts/libraries.json" ,"rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder +  "/json/0/example.json" ,"rb") as f2:
+        with open(out_folder +  "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json" ,"rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
@@ -91,7 +91,7 @@ class TestExtractor(unittest.TestCase):
         feature_dict = extractor.features
         with open("test_assets/expected_features_dicts/sections.json" ,"rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder + "/json/0/example.json", "rb") as f2:
+        with open(out_folder + "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json", "rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
@@ -111,7 +111,7 @@ class TestExtractor(unittest.TestCase):
         features_dict = extractor.features
         with open("test_assets/expected_features_dicts/general_file_info.json","rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder + "/json/0/example.json", "rb") as f2:
+        with open(out_folder + "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json", "rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
@@ -132,7 +132,7 @@ class TestExtractor(unittest.TestCase):
         features_dict = extractor.features
         with open("test_assets/expected_features_dicts/msdos_header.json","rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder + "/json/0/example.json", "rb") as f2:
+        with open(out_folder + "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json", "rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
@@ -153,7 +153,7 @@ class TestExtractor(unittest.TestCase):
         features_dict = extractor.features
         with open("test_assets/expected_features_dicts/optional_header.json","rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder + "/json/0/example.json", "rb") as f2:
+        with open(out_folder + "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json", "rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
@@ -174,7 +174,7 @@ class TestExtractor(unittest.TestCase):
         features_dict = extractor.features
         with open("test_assets/expected_features_dicts/file_size.json","rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder + "/json/0/example.json", "rb") as f2:
+        with open(out_folder + "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json", "rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
@@ -194,7 +194,7 @@ class TestExtractor(unittest.TestCase):
         features_dict = extractor.features
         with open("test_assets/expected_features_dicts/urls.json","rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder + "/json/0/example.json", "rb") as f2:
+        with open(out_folder + "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json", "rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
@@ -215,7 +215,7 @@ class TestExtractor(unittest.TestCase):
         features_dict = extractor.features
         with open("test_assets/expected_features_dicts/imported_functions.json","rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder + "/json/0/example.json", "rb") as f2:
+        with open(out_folder + "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json", "rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
@@ -236,7 +236,7 @@ class TestExtractor(unittest.TestCase):
         features_dict = extractor.features
         with open("test_assets/expected_features_dicts/byte_counts.json","rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder + "/json/0/example.json", "rb") as f2:
+        with open(out_folder + "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json", "rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
@@ -256,7 +256,7 @@ class TestExtractor(unittest.TestCase):
         features_dict = extractor.features
         with open("test_assets/expected_features_dicts/exported_functions.json","rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder + "/json/0/example.json", "rb") as f2:
+        with open(out_folder + "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json", "rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
@@ -291,7 +291,7 @@ class TestExtractor(unittest.TestCase):
         extractor.extract_batch()
         extracted_image_features = extractor.features
         extracted_image =  Image.open("test_assets/expected_features_images/binary_image.png")
-        expected_image = Image.open(out_folder + "/image/binary_image/0/example.png")
+        expected_image = Image.open(out_folder + "/image/binary_image/0/071df5b74f08fb5a4ce13a6cd2e7f485.png")
         difference = assertImage(extracted_image, expected_image)
 
         """
@@ -312,7 +312,7 @@ class TestExtractor(unittest.TestCase):
         features_dict = extractor.features
         with open("test_assets/expected_features_dicts/strings.json","rb") as f1:
             expected_feature_dict = json.load(f1)
-        with open(out_folder + "/json/0/example.json", "rb") as f2:
+        with open(out_folder + "/json/0/071df5b74f08fb5a4ce13a6cd2e7f485.json", "rb") as f2:
             extracted_feature_dict = json.load(f2)
         self.assertEqual(
             extracted_feature_dict,
