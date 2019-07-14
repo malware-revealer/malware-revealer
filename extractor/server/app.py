@@ -5,6 +5,7 @@ from Extractor import extract_one
 import yaml
 import os
 from time import time
+from random import randint
 
 
 app = Flask(__name__, static_url_path='')
@@ -22,8 +23,9 @@ def save_image(name, image, format):
     """
 
     ts = int(time())
-    file_name = '{name}{time}.{format}'
-    file_name = file_name.format(name=name, time=ts, format=format)
+    rand = str(randint(0, 4096)).zfill(5)
+    file_name = '{name}{time}{rand}.{format}'
+    file_name = file_name.format(name=name, time=ts, rand=rand, format=format)
     image.save(os.path.join(IMAGES_DIR, file_name))
     url = 'http://extractor/{image_dir}/{file_name}'
 
@@ -68,5 +70,5 @@ if __name__ == '__main__':
     # Prepate folder to store images
     if not os.path.exists(IMAGES_DIR):
         os.makedirs(IMAGES_DIR)
-        
+
     app.run('0.0.0.0', 80)
