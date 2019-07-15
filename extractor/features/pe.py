@@ -40,8 +40,6 @@ class GeneralFileInfo(BaseFeature):
                 'sizeof_PFheader': 0,
                 'has_signature': False,
                 'has_debug': 0,
-                'exports': 0,
-                'imports': 0,
                 'has_relocations': 0,
                 'has_resources': 0,
                 'has_tls': 0,
@@ -55,8 +53,6 @@ class GeneralFileInfo(BaseFeature):
         features['sizeof_PFheader'] = lief_file.sizeof_headers
         features['has_signature'] =  int(lief_file.has_signature)
         features['has_debug'] =  int(lief_file.has_debug)
-        features['exports'] =  len(lief_file.exported_functions)
-        features['imports'] = len(lief_file.imported_functions)
         features['has_relocations'] = int(lief_file.has_relocations)
         features['has_resources'] = int(lief_file.has_resources)
         features['has_tls'] =  int(lief_file.has_tls)
