@@ -9,7 +9,7 @@ class TestExtractor(unittest.TestCase):
         Test the extractor creation using a test conf file.
         """
         conf_file = "test_assets/extractor_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         feature_list = list(extractor.features.keys())
@@ -27,7 +27,7 @@ class TestExtractor(unittest.TestCase):
                                     'pe.OptionalHeader',
                                     'pe.Libraries',
                                     'pe.Sections',
-                                    'elf.SomeELFFeature',
+                                    'elf.ELFHeader',
                                     ])
         self.assertEqual(
             sorted(feature_list),
@@ -41,7 +41,7 @@ class TestExtractor(unittest.TestCase):
         """
 
         conf_file = "test_assets/extractor_confs/pe_header_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/pe_header"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -62,7 +62,7 @@ class TestExtractor(unittest.TestCase):
         """
 
         conf_file = "test_assets/extractor_confs/libraries_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/libraries"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -84,7 +84,7 @@ class TestExtractor(unittest.TestCase):
         """
 
         conf_file = "test_assets/extractor_confs/sections_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/sections"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -104,7 +104,7 @@ class TestExtractor(unittest.TestCase):
         Testing the file general informations extraction .
         """
         conf_file = "test_assets/extractor_confs/general_file_info_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/general_file_info"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -125,7 +125,7 @@ class TestExtractor(unittest.TestCase):
         Testing the Msdos Header extraction .
         """
         conf_file = "test_assets/extractor_confs/msdos_header_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/msdos_header"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -146,7 +146,7 @@ class TestExtractor(unittest.TestCase):
         Testing the optional header extraction using a test conf file.
         """
         conf_file = "test_assets/extractor_confs/optional_header_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/optional_header"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -167,7 +167,7 @@ class TestExtractor(unittest.TestCase):
         Testing file size extarction using a test conf file.
         """
         conf_file = "test_assets/extractor_confs/file_size_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/file_size"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -187,7 +187,7 @@ class TestExtractor(unittest.TestCase):
         Testing URLs extarction using a test conf file.
         """
         conf_file = "test_assets/extractor_confs/urls_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/urls"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -208,7 +208,7 @@ class TestExtractor(unittest.TestCase):
         Testing imported functions extarction using a test conf file.
         """
         conf_file = "test_assets/extractor_confs/imported_functions_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/imported_functions"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -229,7 +229,7 @@ class TestExtractor(unittest.TestCase):
         Testing the byte counts extraction using a test conf file.
         """
         conf_file = "test_assets/extractor_confs/byte_counts_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/byte_counts"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -249,7 +249,7 @@ class TestExtractor(unittest.TestCase):
         Testing exported functions extarction using a test conf file.
         """
         conf_file = "test_assets/extractor_confs/exported_functions_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/exported_functions"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -285,7 +285,7 @@ class TestExtractor(unittest.TestCase):
             return theDifferenceImage
 
         conf_file = "test_assets/extractor_confs/binary_image_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/binary_image"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -305,7 +305,7 @@ class TestExtractor(unittest.TestCase):
         Testing exported functions extarction using a test conf file.
         """
         conf_file = "test_assets/extractor_confs/strings_conf.yaml"
-        in_folder = "test_assets/executables"
+        in_folder = "test_assets/executables/pe"
         out_folder = "test_assets/extracted_features/strings"
         extractor = Extractor.new(conf_file, in_folder, out_folder)
         extractor.extract_batch()
@@ -319,6 +319,29 @@ class TestExtractor(unittest.TestCase):
             expected_feature_dict,
             "strings don't match"
             )
+
+    def test_elf_header(self):
+        """
+        Testing the extraction of informations from the header of an example
+        ELF file.
+        """
+
+        conf_file = "test_assets/extractor_confs/elf_header_conf.yaml"
+        in_folder = "test_assets/executables/elf"
+        out_folder = "test_assets/extracted_features/elf_header"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+
+        with open("test_assets/expected_features_dicts/elf_header.json","rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/0e1631f5eaadf5ac5010530077727092.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
+
+        self.assertEqual(
+            extracted_feature_dict,
+            expected_feature_dict,
+            "ELF header don't match the expected output"
+        )
 
 
 if __name__ == '__main__':

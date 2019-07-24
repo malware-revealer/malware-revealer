@@ -15,4 +15,4 @@ features:
     - Libraries
     - Sections
   elf:
-    - SomeELFFeature
+    - ELFHeader
