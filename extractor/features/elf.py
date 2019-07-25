@@ -73,3 +73,4 @@ class Sections(BaseFeature):
             }
             features['sections'][section.name] = section_info
         return features
+        
