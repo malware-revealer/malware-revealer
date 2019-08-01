@@ -1,0 +1,387 @@
+{
+  "sections": {
+    "": {
+      "alignment": 0,
+      "entropy": -0,
+      "entry_size": 0,
+      "file_offset": 0,
+      "flags": 0,
+      "flags_list": [],
+      "offset": 0,
+      "original_size": 0,
+      "size": 0,
+      "type": "NULL",
+      "virtual_address": 0
+    },
+    ".interp": {
+      "alignment": 1,
+      "entropy": 3.94075983254009,
+      "entry_size": 0,
+      "file_offset": 680,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 680,
+      "original_size": 28,
+      "size": 28,
+      "type": "PROGBITS",
+      "virtual_address": 680
+    },
+    ".note.ABI-tag": {
+      "alignment": 4,
+      "entropy": 1.561278124459133,
+      "entry_size": 0,
+      "file_offset": 708,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 708,
+      "original_size": 32,
+      "size": 32,
+      "type": "NOTE",
+      "virtual_address": 708
+    },
+    ".note.gnu.build-id": {
+      "alignment": 4,
+      "entropy": 4.0249449750847095,
+      "entry_size": 0,
+      "file_offset": 740,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 740,
+      "original_size": 36,
+      "size": 36,
+      "type": "NOTE",
+      "virtual_address": 740
+    },
+    ".gnu.hash": {
+      "alignment": 8,
+      "entropy": 4.144581298145564,
+      "entry_size": 0,
+      "file_offset": 776,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 776,
+      "original_size": 176,
+      "size": 176,
+      "type": "GNU_HASH",
+      "virtual_address": 776
+    },
+    ".dynsym": {
+      "alignment": 8,
+      "entropy": 1.3080392511958188,
+      "entry_size": 24,
+      "file_offset": 952,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 952,
+      "original_size": 3048,
+      "size": 3048,
+      "type": "DYNSYM",
+      "virtual_address": 952
+    },
+    ".dynstr": {
+      "alignment": 1,
+      "entropy": 4.588073727273439,
+      "entry_size": 0,
+      "file_offset": 4000,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 4000,
+      "original_size": 1445,
+      "size": 1445,
+      "type": "STRTAB",
+      "virtual_address": 4000
+    },
+    ".gnu.version": {
+      "alignment": 2,
+      "entropy": 1.4827685630412446,
+      "entry_size": 2,
+      "file_offset": 5446,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 5446,
+      "original_size": 254,
+      "size": 254,
+      "type": "GNU_VERSYM",
+      "virtual_address": 5446
+    },
+    ".gnu.version_r": {
+      "alignment": 8,
+      "entropy": 2.964086957286236,
+      "entry_size": 0,
+      "file_offset": 5704,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 5704,
+      "original_size": 112,
+      "size": 112,
+      "type": "GNU_VERNEED",
+      "virtual_address": 5704
+    },
+    ".rela.dyn": {
+      "alignment": 8,
+      "entropy": 2.2217203637448453,
+      "entry_size": 24,
+      "file_offset": 5816,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 5816,
+      "original_size": 7440,
+      "size": 7440,
+      "type": "RELA",
+      "virtual_address": 5816
+    },
+    ".init": {
+      "alignment": 4,
+      "entropy": 4.310443057719025,
+      "entry_size": 0,
+      "file_offset": 16384,
+      "flags": 6,
+      "flags_list": [
+        "ALLOC",
+        "EXECINSTR"
+      ],
+      "offset": 16384,
+      "original_size": 27,
+      "size": 27,
+      "type": "PROGBITS",
+      "virtual_address": 16384
+    },
+    ".text": {
+      "alignment": 16,
+      "entropy": 6.23881414515972,
+      "entry_size": 0,
+      "file_offset": 16416,
+      "flags": 6,
+      "flags_list": [
+        "ALLOC",
+        "EXECINSTR"
+      ],
+      "offset": 16416,
+      "original_size": 77187,
+      "size": 77187,
+      "type": "PROGBITS",
+      "virtual_address": 16416
+    },
+    ".fini": {
+      "alignment": 4,
+      "entropy": 3.238901256602631,
+      "entry_size": 0,
+      "file_offset": 93604,
+      "flags": 6,
+      "flags_list": [
+        "ALLOC",
+        "EXECINSTR"
+      ],
+      "offset": 93604,
+      "original_size": 13,
+      "size": 13,
+      "type": "PROGBITS",
+      "virtual_address": 93604
+    },
+    ".rodata": {
+      "alignment": 32,
+      "entropy": 5.442324115068527,
+      "entry_size": 0,
+      "file_offset": 94208,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 94208,
+      "original_size": 20937,
+      "size": 20937,
+      "type": "PROGBITS",
+      "virtual_address": 94208
+    },
+    ".eh_frame_hdr": {
+      "alignment": 4,
+      "entropy": 5.049319211438386,
+      "entry_size": 0,
+      "file_offset": 115148,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 115148,
+      "original_size": 2244,
+      "size": 2244,
+      "type": "PROGBITS",
+      "virtual_address": 115148
+    },
+    ".eh_frame": {
+      "alignment": 8,
+      "entropy": 4.957718357381173,
+      "entry_size": 0,
+      "file_offset": 117392,
+      "flags": 2,
+      "flags_list": [
+        "ALLOC"
+      ],
+      "offset": 117392,
+      "original_size": 11776,
+      "size": 11776,
+      "type": "PROGBITS",
+      "virtual_address": 117392
+    },
+    ".init_array": {
+      "alignment": 8,
+      "entropy": 1.061278124459133,
+      "entry_size": 8,
+      "file_offset": 131152,
+      "flags": 3,
+      "flags_list": [
+        "WRITE",
+        "ALLOC"
+      ],
+      "offset": 131152,
+      "original_size": 8,
+      "size": 8,
+      "type": "INIT_ARRAY",
+      "virtual_address": 135248
+    },
+    ".fini_array": {
+      "alignment": 8,
+      "entropy": 1.061278124459133,
+      "entry_size": 8,
+      "file_offset": 131160,
+      "flags": 3,
+      "flags_list": [
+        "WRITE",
+        "ALLOC"
+      ],
+      "offset": 131160,
+      "original_size": 8,
+      "size": 8,
+      "type": "FINI_ARRAY",
+      "virtual_address": 135256
+    },
+    ".data.rel.ro": {
+      "alignment": 32,
+      "entropy": 1.765041809461255,
+      "entry_size": 0,
+      "file_offset": 131168,
+      "flags": 3,
+      "flags_list": [
+        "WRITE",
+        "ALLOC"
+      ],
+      "offset": 131168,
+      "original_size": 2616,
+      "size": 2616,
+      "type": "PROGBITS",
+      "virtual_address": 135264
+    },
+    ".dynamic": {
+      "alignment": 8,
+      "entropy": 1.4954226001326287,
+      "entry_size": 16,
+      "file_offset": 133784,
+      "flags": 3,
+      "flags_list": [
+        "WRITE",
+        "ALLOC"
+      ],
+      "offset": 133784,
+      "original_size": 448,
+      "size": 448,
+      "type": "DYNAMIC",
+      "virtual_address": 137880
+    },
+    ".got": {
+      "alignment": 8,
+      "entropy": 0.03708292630022042,
+      "entry_size": 8,
+      "file_offset": 134232,
+      "flags": 3,
+      "flags_list": [
+        "WRITE",
+        "ALLOC"
+      ],
+      "offset": 134232,
+      "original_size": 912,
+      "size": 912,
+      "type": "PROGBITS",
+      "virtual_address": 138328
+    },
+    ".data": {
+      "alignment": 32,
+      "entropy": 1.3664685717063851,
+      "entry_size": 0,
+      "file_offset": 135168,
+      "flags": 3,
+      "flags_list": [
+        "WRITE",
+        "ALLOC"
+      ],
+      "offset": 135168,
+      "original_size": 616,
+      "size": 616,
+      "type": "PROGBITS",
+      "virtual_address": 139264
+    },
+    ".bss": {
+      "alignment": 32,
+      "entropy": 1.1437569848128821,
+      "entry_size": 0,
+      "file_offset": 135784,
+      "flags": 3,
+      "flags_list": [
+        "WRITE",
+        "ALLOC"
+      ],
+      "offset": 135784,
+      "original_size": 4824,
+      "size": 4824,
+      "type": "NOBITS",
+      "virtual_address": 139904
+    },
+    ".comment": {
+      "alignment": 1,
+      "entropy": 3.7939891814147986,
+      "entry_size": 1,
+      "file_offset": 135784,
+      "flags": 48,
+      "flags_list": [
+        "MERGE",
+        "STRINGS"
+      ],
+      "offset": 135784,
+      "original_size": 52,
+      "size": 52,
+      "type": "PROGBITS",
+      "virtual_address": 0
+    },
+    ".shstrtab": {
+      "alignment": 1,
+      "entropy": 4.240806166752098,
+      "entry_size": 0,
+      "file_offset": 135836,
+      "flags": 0,
+      "flags_list": [],
+      "offset": 135836,
+      "original_size": 237,
+      "size": 237,
+      "type": "STRTAB",
+      "virtual_address": 0
+    }
+  },
+  "section_counts": 25
+}

@@ -42,3 +42,44 @@ class ELFHeader(BaseFeature):
             'processor_flag': header.processor_flag,
         }
         return features
+
+
+class Sections(BaseFeature):
+    name = 'sections'
+
+    def can_extract(self, raw_exe):
+        b_list = list(raw_exe)
+        elf_binary = lief.ELF.parse(raw=b_list)
+        if elf_binary:
+            return True
+        else:
+            return False
+
+
+    def extract_features(self, raw_exe):
+        lief_file = lief_from_raw(raw_exe)
+        sections = lief_file.sections
+
+        features = {
+            'sections': {},
+            'section_counts': len(sections),
+        }
+        for section in sections:
+            flags_list = [str(f).split('.')[1] for f in section.flags_list]
+
+            section_info = {
+                'alignment': section.alignment,
+                'entropy': section.entropy,
+                'entry_size': section.entry_size,
+                'file_offset': section.file_offset,
+                'flags': section.flags,
+                'flags_list': flags_list,
+                'offset': section.offset,
+                'original_size': section.original_size,
+                'size': section.size,
+                'type': str(section.type).split('.')[1],
+                'virtual_address': section.virtual_address,
+            }
+            features['sections'][section.name] = section_info
+
+        return features
