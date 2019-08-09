@@ -368,6 +368,29 @@ class TestExtractor(unittest.TestCase):
         )
 
 
+    def test_elf_libraries(self):
+        """
+        Testing the extraction of ELF library names
+        """
+
+        conf_file = "test_assets/extractor_confs/elf_libraries_conf.yaml"
+        in_folder = "test_assets/executables/elf"
+        out_folder = "test_assets/extracted_features/elf_libraries"
+        extractor = Extractor.new(conf_file, in_folder, out_folder)
+        extractor.extract_batch()
+
+        with open("test_assets/expected_features_dicts/elf_libraries.json","rb") as f1:
+            expected_feature_dict = json.load(f1)
+        with open(out_folder + "/json/0/0e1631f5eaadf5ac5010530077727092.json", "rb") as f2:
+            extracted_feature_dict = json.load(f2)
+
+        self.assertEqual(
+            extracted_feature_dict,
+            expected_feature_dict,
+            "ELF Sections don't match the expected output"
+        )
+
+
 
 if __name__ == '__main__':
     unittest.main()

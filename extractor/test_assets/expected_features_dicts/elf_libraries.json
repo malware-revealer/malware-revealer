@@ -1,0 +1,7 @@
+{
+  "libraries": [
+    "libcap.so.2",
+    "libc.so.6"
+  ],
+  "libraries_counts": 2
+}

@@ -79,3 +79,18 @@ class Sections(BaseELFFeature):
             features['sections'][section.name] = section_info
 
         return features
+
+
+class ELFLibraries(BaseELFFeature):
+    """Extract used library names and their count"""
+
+    name = 'elf_libraries'
+
+    def extract_features(self, raw_exe):
+        lief_file = lief_from_raw(raw_exe)
+        libraries = lief_file.libraries
+        features = {
+            'libraries': libraries,
+            'libraries_counts': len(libraries),
+        }
+        return features
