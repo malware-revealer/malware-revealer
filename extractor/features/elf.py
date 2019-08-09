@@ -7,8 +7,10 @@ from .base import BaseFeature
 from .utils import lief_from_raw
 
 
-class ELFHeader(BaseFeature):
-    name = "elf_header"
+class BaseELFFeature(BaseFeature):
+    """Base feature extractor for ELF extractors
+    Implement the default can_extract method.
+    """
 
     def can_extract(self, raw_exe):
         b_list = list(raw_exe)
@@ -18,6 +20,9 @@ class ELFHeader(BaseFeature):
         else:
             return False
 
+
+class ELFHeader(BaseELFFeature):
+    name = "elf_header"
 
     def extract_features(self, raw_exe):
         lief_file = lief_from_raw(raw_exe)
@@ -44,17 +49,8 @@ class ELFHeader(BaseFeature):
         return features
 
 
-class Sections(BaseFeature):
+class Sections(BaseELFFeature):
     name = 'sections'
-
-    def can_extract(self, raw_exe):
-        b_list = list(raw_exe)
-        elf_binary = lief.ELF.parse(raw=b_list)
-        if elf_binary:
-            return True
-        else:
-            return False
-
 
     def extract_features(self, raw_exe):
         lief_file = lief_from_raw(raw_exe)
